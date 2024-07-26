@@ -1,0 +1,20 @@
+{
+    "fontawesome": {
+        "normal": "fontawesome_normal_d1c949ed5376e8fe9dfe938ddb24f4f8"
+    },
+    "icomoon": {
+        "normal": "icomoon_normal_478b425161b0765a0c3855182a9efeff"
+    },
+    "open sans": {
+        "normal": "E:\\xampp_php_8.2\\htdocs\\iroad\\storage\\fonts\/open_sans_normal_0c50822862df0e4bc3da7bec4af72b54",
+        "600": "E:\\xampp_php_8.2\\htdocs\\iroad\\storage\\fonts\/open_sans_600_75341019d0aad9d730980a0320d86ab8",
+        "bold": "E:\\xampp_php_8.2\\htdocs\\iroad\\storage\\fonts\/open_sans_bold_16020d134f3ca847d8cdba64e3e9ca33",
+        "800": "open_sans_800_54e4dbec225310932e45306345a8c89d"
+    },
+    "playfair display": {
+        "italic": "E:\\xampp_php_8.2\\htdocs\\iroad\\storage\\fonts\/playfair_display_italic_1dfa5016d9aa9d2a591961d4820b12dc",
+        "bold_italic": "E:\\xampp_php_8.2\\htdocs\\iroad\\storage\\fonts\/playfair_display_bold_italic_aa6dd73e6d1d5137d5530258991e9aaa",
+        "normal": "E:\\xampp_php_8.2\\htdocs\\iroad\\storage\\fonts\/playfair_display_normal_9a62786da1e91ab737257bb990731afc",
+        "bold": "playfair_display_bold_90149614024fbeb92b1ffedadd24e0f6"
+    }
+}
