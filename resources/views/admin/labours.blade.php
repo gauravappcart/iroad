@@ -253,7 +253,7 @@
         , messages: {
             labour_type: {
                 required: "Please Select Labour Type",
-                 noBlankSpaces: "Your first name must contain only letters without spaces"
+                 noBlankSpaces: "Your First Name Must Contain Only Letters Without Spaces"
             }
            ,
             is_active:{

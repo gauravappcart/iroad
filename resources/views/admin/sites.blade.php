@@ -162,19 +162,19 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="site_name" class=" form-control-label">SITE NAME</label>
+                                            <label for="site_name" class=" form-control-label">SITE NAME<span style="color:red">*</span></label>
                                             <input type="text" id="site_name" name="site_name" placeholder="Site Name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="no_of_junction" class=" form-control-label">JUNCTIONS</label>
+                                            <label for="no_of_junction" class=" form-control-label">JUNCTIONS<span style="color:red">*</span></label>
                                             <input type="number" id="no_of_junction" name="no_of_junction" placeholder="No Of Junction" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="road_length" class=" form-control-label">LENGTH OF ROAD</label>
+                                            <label for="road_length" class=" form-control-label">LENGTH OF ROAD<span style="color:red">*</span></label>
                                             <label class="input-group">
                                                 <input type="text" id="road_length" readonly name="road_length" placeholder="" class="form-control">
                                                 <span class="input-group-addon">Meters</span>
@@ -183,7 +183,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="tender_budget" class=" form-control-label">TENDER BUDGET</label>
+                                            <label for="tender_budget" class=" form-control-label">TENDER BUDGET<span style="color:red">*</span></label>
                                             <label class="input-group">
                                                 <input type="number" id="tender_budget" name="tender_budget" placeholder="Tender Budget" class="form-control">
                                                 <span class="input-group-addon">INR</span>
@@ -195,19 +195,19 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="project_start_date" class=" form-control-label">PROJECT START DATE</label>
+                                            <label for="project_start_date" class=" form-control-label">PROJECT START DATE<span style="color:red">*</span></label>
                                             <input max="{{date('Y-m-d')}}" type="date" id="project_start_date" name="project_start_date" placeholder="Enter Site Start Date" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="project_end_date" class=" form-control-label">PROJECT END DATE</label>
+                                            <label for="project_end_date" class=" form-control-label">PROJECT END DATE<span style="color:red">*</span></label>
                                             <input min="{{date('Y-m-d')}}" type="date" id="project_end_date" name="project_end_date" placeholder="Enter Site End Date" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="design_chainage" class=" form-control-label">DESIGN CHAINAGE</label>
+                                            <label for="design_chainage" class=" form-control-label">DESIGN CHAINAGE<span style="color:red">*</span></label>
                                             <input type="number" min=0 id="design_chainage" name="design_chainage" placeholder="" class="form-control">
                                         </div>
                                     </div>
@@ -224,7 +224,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="road_name"  class=" form-control-label">Name Of Road</label>
+                                                <label for="road_name"  class=" form-control-label">Name Of Road<span style="color:red">*</span></label>
                                                 <input type="text" name="road_name"  id="road_name"  placeholder="Enter Name Of Road" class="form-control">
                                             </div>
                                     </div>
@@ -721,6 +721,9 @@ function setPath() {
             },
             project_end_date: {
               required: true
+            } ,
+            design_chainage:{
+                required:true
             }
         },
         messages: {
@@ -742,6 +745,9 @@ function setPath() {
             },
             project_end_date: {
               required: "Please Select Project End Date"
+            },
+            design_chainage:{
+                required:"Please Enter Design Chainage"
             }
 
         },
@@ -791,6 +797,24 @@ function setPath() {
     });
 
 
+
+    $('#scrollmodal').on('hidden.bs.modal', function(e) {
+        document.getElementById("add_site").reset();
+        $(this)
+            .find("textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end()
+            .find("img")
+            .prop("src", "")
+            .end();
+
+        var $add_labour_types = $('#add_site');
+        $add_labour_types.validate().resetForm();
+        $add_labour_types.find('.error').removeClass('error');
+    })
 
   </script>
 

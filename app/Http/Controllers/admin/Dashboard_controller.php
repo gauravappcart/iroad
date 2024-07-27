@@ -125,7 +125,7 @@ class Dashboard_controller extends Controller
                                         ])->select('*')->where(['token'=>$token])->first();
                                         // dd($logged_user['user']);
         $logged_user['route_name']=$request->route()->getName();
-        $logged_user['company_id']=$logged_user['user']->company_id;
+        $logged_user['company_id']=!empty($logged_user['user']->company_id)?$logged_user['user']->company_id:"";
 
         return $logged_user;
     }

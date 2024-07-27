@@ -454,7 +454,21 @@
 
         }
         , messages: {
-
+            monitering_activity: {
+                required: "Please Select Activity"
+            },
+            monitor_item_unit: {
+                required: "Please Select Unit"
+            }
+            , "tender_items[]": {
+                required: "Please Select Tender Item"
+            },
+            is_active:{
+                required: "Please Select Option"
+            },
+            'monitored_tender_item':{
+                required: "Please Select Monitored Tender Item"
+            }
         }
         , submitHandler: function(form, message) {
             redUrl = base_url + '/attach-tender-items-to-monitoring-activity';

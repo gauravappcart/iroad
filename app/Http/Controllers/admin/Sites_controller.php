@@ -208,7 +208,7 @@ class Sites_controller extends Controller
             $result['activity_list'] = Activity_model::whereIn('activity_id', $component_monitoring_activity_array)->get();
         }
         // dd($result['activity_list']);
-            // dd( base64_decode($result['site_id']));
+        // dd( base64_decode($result['site_id']));
         $result['activity_tender_list'] = MonitorTender::with('associated_monitering_tenders')
             ->leftJoin('monitoring_activities', 'monitor_tenders.monitor_activity_id', 'monitoring_activities.activity_id')
             ->leftJoin('road_components_chainage', 'road_components_chainage.chainage_id', 'monitor_tenders.chainage_id') // added on 10-06-2024
@@ -220,7 +220,7 @@ class Sites_controller extends Controller
 
             // ->where('monitor_tenders.chainage_id', base64_decode($result['chainage_id']))   // removed on 10-06-2024
             // ->where('monitor_tenders.component_id', $result['component_id'])                // removed on 10-06-2024
-            ->select('monitoring_activities.activity_name', 'monitoring_activities.activity_description','site_plan_activities.numbers_of_days','monitor_tenders.*', 'road_components_chainage.from_length', 'road_components_chainage.to_length') // added on 10-06-2024
+            ->select('monitoring_activities.activity_name', 'monitoring_activities.activity_description', 'site_plan_activities.numbers_of_days', 'monitor_tenders.*', 'road_components_chainage.from_length', 'road_components_chainage.to_length') // added on 10-06-2024
             // ->select('monitoring_activities.activity_name', 'monitoring_activities.activity_description', 'site_plan_activities.numbers_of_days', 'monitor_tenders.*') // removed on 10-06-2024
             ->orderBy('road_components_chainage.from_length')
             ->get()->toArray();
@@ -238,9 +238,10 @@ class Sites_controller extends Controller
 
         $result['material_type'] = Material_types_model::all();
         $result['materials'] = Material_model::leftjoin('units', 'units.unit_id', 'materials.material_unit')
-                                                        // ->whereIn('materials.site_id',[0,base64_decode($result['site_id'])])
-                                                        ->select('materials.*', 'units.unit_name')->get();
-                                                        // dd(($result['materials']));
+            // ->whereIn('materials.site_id',[0,base64_decode($result['site_id'])])
+            ->where('materials.is_active',1)
+            ->select('materials.*', 'units.unit_name')->get();
+        // dd(($result['materials']));
         $result['site_plan_machines'] = SitePlanMachine::where('site_plan_machines.site_id', base64_decode($result['site_id']))
             ->select('site_plan_machines.*')
             ->get();
@@ -354,7 +355,7 @@ class Sites_controller extends Controller
                     [
                         'component_id' => $request->input('component_id'),
                         'site_id' => base64_decode($request->input('site_id')),
-                        'chainage_id' =>$chainage_id,
+                        'chainage_id' => $chainage_id,
                         'activity_id' => $monitor_activity_id,
                     ],
                     $site_plan_activity_array
@@ -578,15 +579,17 @@ class Sites_controller extends Controller
         // dd($request->selectedOptions);
         if ($request->selectedOptions) {
             $options = Material_model::leftjoin('units', 'units.unit_id', 'materials.material_unit')
-            ->where('material_type', $material_type)->whereNotIn('materials.material_id', $request->selectedOptions)
-            ->whereIn('materials.site_id',[0,base64_decode($request->site_id)])
-            ->select('materials.*', 'units.unit_name')->get();
+                ->where('material_type', $material_type)->whereNotIn('materials.material_id', $request->selectedOptions)
+                ->whereIn('materials.site_id', [0, base64_decode($request->site_id)])
+                ->where('materials.is_active',1)
+                ->select('materials.*', 'units.unit_name')->get();
         } else {
 
             $options = Material_model::leftjoin('units', 'units.unit_id', 'materials.material_unit')
-            ->where('material_type', $material_type)
-              ->whereIn('materials.site_id',[0,base64_decode($request->site_id)])
-            ->select('materials.*', 'units.unit_name')->get();
+                ->where('material_type', $material_type)
+                ->whereIn('materials.site_id', [0, base64_decode($request->site_id)])
+                ->where('materials.is_active',1)
+                ->select('materials.*', 'units.unit_name')->get();
         }
         // dd($options);
         return response()->json($options);
@@ -645,7 +648,7 @@ class Sites_controller extends Controller
         $result['site_id'] = $request->site_id;
         $result['chainage_id'] = $request->chainage_id;
 
-        $result['weeklyplan_data'] = SiteWeeklyPlan::leftJoin('road_components','road_components.component_id','site_weekly_plans.component_id')->where('chainage_id', base64_decode($request->chainage_id))->select('site_weekly_plans.*','road_components.component_name')->get();
+        $result['weeklyplan_data'] = SiteWeeklyPlan::leftJoin('road_components', 'road_components.component_id', 'site_weekly_plans.component_id')->where('chainage_id', base64_decode($request->chainage_id))->select('site_weekly_plans.*', 'road_components.component_name')->get();
         // dd($result['weeklyplan_data']);
 
         $result['site'] = $this->siteservice->get_site($request->all());
@@ -667,14 +670,15 @@ class Sites_controller extends Controller
 
         //if minValue and maxValue is provided by user then we use this if condition
         if ((!empty($request->minValue) || $request->minValue == "0") && !empty($request->maxValue)) {
+            // dd($result['site_id_decoded']);
             $result['site_chainages'] = ComponentChainageModel::select('road_components_chainage.*', 'road_components.component_name')
                 ->leftjoin('road_components', 'road_components.component_id', 'road_components_chainage.component_id')
-                ->where('site_id', $result['site_id_decoded'])
-                ->where('to_length', '<=', $request->maxValue)
-                ->where('from_length', '>=', $request->minValue)
-                ->orWhereNull('from_length')
+                ->where('road_components_chainage.site_id', $result['site_id_decoded'])
+                ->where('road_components_chainage.to_length', '<=', $request->maxValue)
+                ->where('road_components_chainage.from_length', '>=', $request->minValue)
+                // ->orWhereNull('road_components_chainage.from_length')
                 ->get()->toArray();
-
+        // dd( $result['site_chainages']);
             if ($result['site_chainages']) {
                 $result['chainage_id_decoded'] = $result['site_chainages'][0]['chainage_id'];
                 $result['chainage_id'] = base64_encode($result['site_chainages'][0]['chainage_id']);
@@ -725,23 +729,31 @@ class Sites_controller extends Controller
         // dd($result['site']);
 
 
-        $result['weeklyplan_data'] = SiteWeeklyPlan::with('materials')->with('machines')->with('labours')->with('extrafields')->leftJoin('road_components','road_components.component_id','site_weekly_plans.component_id')
-                                                    ->leftJoin('road_components_chainage','road_components_chainage.chainage_id','site_weekly_plans.chainage_id')
-                                                    ->leftJoin('monitoring_activities','monitoring_activities.activity_id','site_weekly_plans.monitor_activity_id')
-                                                    ->where('site_weekly_plans.chainage_id', base64_decode($request->chainage_id))
-                                                    ->where('site_weekly_plan_id',$result['site_weekly_plan_id'])
-                                                    ->select('site_weekly_plans.*','road_components.component_name','road_components_chainage.from_length','road_components_chainage.to_length',
-                                                    'road_components_chainage.chainage_foundation_height as road_chainage_foundation_height','road_components_chainage.chainage_pier_height as road_chainage_pier_height',
-                                                    'road_components_chainage.chainage_pier_cap_height as road_chainage_pier_cap_height','road_components_chainage.chainage_max_elevation_height as road_chainage_max_elevation_height',
-                                                    'road_components_chainage.chainage_max_depth_at_center as road_chainage_max_depth_at_center','road_components_chainage.chainage_width as road_chainage_width',
-                                                    'road_components_chainage.chainage_thickness as road_chainage_thickness','road_components_chainage.chainage_height as road_chainage_height',
-                                                    'monitoring_activities.activity_name'
-                                                    )
-                                                    ->get()->toArray();
-// dd($result['weeklyplan_data']);
+        $result['weeklyplan_data'] = SiteWeeklyPlan::with('materials')->with('machines')->with('labours')->with('extrafields')->leftJoin('road_components', 'road_components.component_id', 'site_weekly_plans.component_id')
+            ->leftJoin('road_components_chainage', 'road_components_chainage.chainage_id', 'site_weekly_plans.chainage_id')
+            ->leftJoin('monitoring_activities', 'monitoring_activities.activity_id', 'site_weekly_plans.monitor_activity_id')
+            ->where('site_weekly_plans.chainage_id', base64_decode($request->chainage_id))
+            ->where('site_weekly_plan_id', $result['site_weekly_plan_id'])
+            ->select(
+                'site_weekly_plans.*',
+                'road_components.component_name',
+                'road_components_chainage.from_length',
+                'road_components_chainage.to_length',
+                'road_components_chainage.chainage_foundation_height as road_chainage_foundation_height',
+                'road_components_chainage.chainage_pier_height as road_chainage_pier_height',
+                'road_components_chainage.chainage_pier_cap_height as road_chainage_pier_cap_height',
+                'road_components_chainage.chainage_max_elevation_height as road_chainage_max_elevation_height',
+                'road_components_chainage.chainage_max_depth_at_center as road_chainage_max_depth_at_center',
+                'road_components_chainage.chainage_width as road_chainage_width',
+                'road_components_chainage.chainage_thickness as road_chainage_thickness',
+                'road_components_chainage.chainage_height as road_chainage_height',
+                'monitoring_activities.activity_name'
+            )
+            ->get()->toArray();
+        // dd($result['weeklyplan_data']);
         return view('admin/view_weekly_plan', $result);
     }
-    function save_weekly_plan(Request $request)
+    function save_weekly_plan_old(Request $request)
     {
         // dd($request->all());
         $data = 0;
@@ -965,7 +977,7 @@ class Sites_controller extends Controller
                         'material_quantity' => $request->material_quantity2[$key],
                         'plain_or_lhs_rhs' => $request->options,      // if 1= REGULAR PLAIN ROAD. 2= EITHER LHS ROAD OR RHS ROAD
                         'lhs_rhs_both' => $request->lhs_and_rhs,      // if 1= LHS ROAD. 2= RHS ROAD. 3= BOTH(LHS and RHS)
-                        'lhs_or_rhs_material'=>1,
+                        'lhs_or_rhs_material' => 1,
                         'lhs_start_date' => $request->lhs_start2,
                         'lhs_end_date' => $request->lhs_end2,
                         'rhs_start_date' => $request->rhs_start3,
@@ -986,7 +998,7 @@ class Sites_controller extends Controller
                         'machine_quantity' => $request->machine_quantity2[$key],
                         'plain_or_lhs_rhs' => $request->options,      // if 1= REGULAR PLAIN ROAD. 2= EITHER LHS ROAD OR RHS ROAD
                         'lhs_rhs_both' => $request->lhs_and_rhs,      // if 1= LHS ROAD. 2= RHS ROAD. 3= BOTH(LHS and RHS)
-                        'lhs_or_rhs_machine'=>1,
+                        'lhs_or_rhs_machine' => 1,
                         'lhs_start_date' => $request->lhs_start2,
                         'lhs_end_date' => $request->lhs_end2,
                         'rhs_start_date' => $request->rhs_start3,
@@ -1008,7 +1020,7 @@ class Sites_controller extends Controller
                         'labour_quantity' => $request->labours_quantity2[$key],
                         'plain_or_lhs_rhs' => $request->options,      // if 1= REGULAR PLAIN ROAD. 2= EITHER LHS ROAD OR RHS ROAD
                         'lhs_rhs_both' => $request->lhs_and_rhs,      // if 1= LHS ROAD. 2= RHS ROAD. 3= BOTH(LHS and RHS)
-                        'lhs_or_rhs_labour'=>1,
+                        'lhs_or_rhs_labour' => 1,
                         'lhs_start_date' => $request->lhs_start2,
                         'lhs_end_date' => $request->lhs_end2,
                         'rhs_start_date' => $request->rhs_start3,
@@ -1030,7 +1042,7 @@ class Sites_controller extends Controller
                         'material_quantity' => $request->material_quantity3[$key],
                         'plain_or_lhs_rhs' => $request->options,      // if 1= REGULAR PLAIN ROAD. 2= EITHER LHS ROAD OR RHS ROAD
                         'lhs_rhs_both' => $request->lhs_and_rhs,      // if 1= LHS ROAD. 2= RHS ROAD. 3= BOTH(LHS and RHS)
-                        'lhs_or_rhs_material'=>2,
+                        'lhs_or_rhs_material' => 2,
                         'lhs_start_date' => $request->lhs_start2,
                         'lhs_end_date' => $request->lhs_end2,
                         'rhs_start_date' => $request->rhs_start3,
@@ -1052,7 +1064,7 @@ class Sites_controller extends Controller
                         'machine_quantity' => $request->machine_quantity3[$key],
                         'plain_or_lhs_rhs' => $request->options,      // if 1= REGULAR PLAIN ROAD. 2= EITHER LHS ROAD OR RHS ROAD
                         'lhs_rhs_both' => $request->lhs_and_rhs,      // if 1= LHS ROAD. 2= RHS ROAD. 3= BOTH(LHS and RHS)
-                        'lhs_or_rhs_machine'=>2,
+                        'lhs_or_rhs_machine' => 2,
                         'lhs_start_date' => $request->lhs_start2,
                         'lhs_end_date' => $request->lhs_end2,
                         'rhs_start_date' => $request->rhs_start3,
@@ -1074,7 +1086,7 @@ class Sites_controller extends Controller
                         'labour_quantity' => $request->labours_quantity3[$key],
                         'plain_or_lhs_rhs' => $request->options,      // if 1= REGULAR PLAIN ROAD. 2= EITHER LHS ROAD OR RHS ROAD
                         'lhs_rhs_both' => $request->lhs_and_rhs,      // if 1= LHS ROAD. 2= RHS ROAD. 3= BOTH(LHS and RHS)
-                        'lhs_or_rhs_labour'=>2,
+                        'lhs_or_rhs_labour' => 2,
                         'lhs_start_date' => $request->lhs_start2,
                         'lhs_end_date' => $request->lhs_end2,
                         'rhs_start_date' => $request->rhs_start3,
@@ -1085,14 +1097,149 @@ class Sites_controller extends Controller
                     ]);
                 }
             }
-            $data=1;
+            $data = 1;
         }
-        if($data==1)
-        {
-            $result=array('status'=>true,'msg'=>'Weekly plan added successfully');
+        if ($data == 1) {
+            $result = array('status' => true, 'msg' => 'Weekly plan added successfully');
         } else {
-            $result=array('status'=>false,'msg'=>'Something went wrong');
+            $result = array('status' => false, 'msg' => 'Something went wrong');
         }
+
+        echo json_encode($result);
+    }
+
+    function save_weekly_plan(Request $request)
+    {
+        $data = 0;
+        $component_id_data = ComponentChainageModel::select('component_id')
+            ->where('chainage_id', base64_decode($request->chainage_list))
+            ->first();
+
+        $site_plan_machine = SiteWeeklyPlan::create([
+            'site_id' => base64_decode($request->site_id),
+            'component_id' => $component_id_data->component_id,
+            'chainage_id' => base64_decode($request->chainage_list),
+            'chainage_from_length' => $request->chainage_from,
+            'chainage_to_length' => $request->chainage_to,
+            'chainage_height' => $request->chainage_height ?: null,
+            'chainage_max_elevation_height' => $request->chainage_max_elevation_height ?: null,
+            'chainage_max_depth_at_center' => $request->chainage_max_depth_at_center ?: null,
+            'chainage_foundation_height' => $request->chainage_foundation_height ?: null,
+            'chainage_pier_height' => $request->chainage_pier_height ?: null,
+            'chainage_pier_cap_height' => $request->chainage_pier_cap_height ?: null,
+            'chainage_width' => $request->chainage_width ?: null,
+            'chainage_thickness' => $request->chainage_thickness ?: null,
+            'plan_start_date' => $request->plan_start,
+            'plan_end_date' => $request->plan_end,
+            'monitor_activity_id' => $request->activity_list,
+            'plain_or_lhs_rhs' => $request->options,
+            'lhs_rhs_both' => $request->lhs_and_rhs,
+            'lhs_start_date' => $request->lhs_start2,
+            'lhs_end_date' => $request->lhs_end2,
+            'rhs_start_date' => $request->rhs_start3,
+            'rhs_end_date' => $request->rhs_end3,
+            'created_by' => $request->role,
+            'updated_by' => $request->role,
+            'is_active' => 1,
+        ]);
+        function call_user_func($table, $data, $tablename)
+        {
+            // dd($tablename);
+            if ($tablename === 'material') {
+                // dd($data);
+                SiteWeeklyPlanMaterial::create($data);
+            } elseif ($tablename === 'machine') {
+                SiteWeeklyPlanMachine::create($data);
+            } elseif ($tablename === 'labour') {
+                SiteWeeklyPlanLabour::create($data);
+            }
+        }
+
+
+        if (!empty($request->extra) && !empty($request->extra_field_id)) {
+            foreach ($request->extra_field_id as $key => $value) {
+                $site_plan_machine = SiteWeeklyPlanExtraFields::create([
+                    'site_weekly_plan_id' => $site_plan_machine->site_weekly_plan_id,
+                    'site_id' => base64_decode($request->site_id),
+                    'component_id' => $component_id_data->component_id,
+                    'chainage_id' => base64_decode($request->chainage_list),
+                    'component_extra_field_id' => $value,
+                    'quantity' => $request->extra[$key],
+                    'created_by' => $request->role,
+                    'updated_by' => $request->role,
+                    'is_active' => 1,
+                ]);
+            }
+        }
+
+        // Helper function to aggregate quantities
+        function aggregateItems($names, $quantities)
+        {
+            $aggregated = [];
+            foreach ($names as $key => $value) {
+                if (isset($aggregated[$value])) {
+                    $aggregated[$value] += $quantities[$key];
+                } else {
+                    $aggregated[$value] = $quantities[$key];
+                }
+            }
+            // dd( $aggregated);
+            return $aggregated;
+        }
+
+        // Aggregating and inserting items
+        function insertAggregatedItems($request, $site_plan_machine, $component_id_data, $names, $quantities, $table, $extraFields = [])
+        {
+            $aggregated = aggregateItems($names, $quantities);
+            foreach ($aggregated as $id => $quantity) {
+                $data = array_merge([
+                    'site_id' => base64_decode($request->site_id),
+                    'site_weekly_plan_id' => $site_plan_machine->site_weekly_plan_id,
+                    'component_id' => $component_id_data->component_id,
+                    'chainage_id' => base64_decode($request->chainage_list),
+                    $table . '_id' => $id,
+                    $table . '_quantity' => $quantity,
+                    'plain_or_lhs_rhs' => $request->options,
+                    'lhs_rhs_both' => $request->lhs_and_rhs,
+                    'lhs_start_date' => $request->lhs_start2,
+                    'lhs_end_date' => $request->lhs_end2,
+                    'rhs_start_date' => $request->rhs_start3,
+                    'rhs_end_date' => $request->rhs_end3,
+                    'created_by' => $request->role,
+                    'updated_by' => $request->role,
+                    'is_active' => 1,
+                ], $extraFields);
+
+                call_user_func("SiteWeeklyPlan" . ucfirst($table) . "::create", $data, $table);
+            }
+        }
+
+
+
+        if ($request->options == "1") {
+            insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->material_name, $request->material_quantity, 'material');
+            insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->machine_name, $request->machine_quantity, 'machine');
+            insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->labours_name, $request->labours_quantity, 'labour');
+            $data = 1;
+        }
+
+        if ($request->options == "2") {
+            if ($request->lhs_and_rhs == "1" || $request->lhs_and_rhs == "3") {
+                insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->material_name2, $request->material_quantity2, 'material', ['lhs_or_rhs_material' => 1]);
+                insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->machine_name2, $request->machine_quantity2, 'machine', ['lhs_or_rhs_machine' => 1]);
+                insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->labours_name2, $request->labours_quantity2, 'labour', ['lhs_or_rhs_labour' => 1]);
+            }
+            if ($request->lhs_and_rhs == "2" || $request->lhs_and_rhs == "3") {
+                insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->material_name3, $request->material_quantity3, 'material', ['lhs_or_rhs_material' => 2]);
+                insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->machine_name3, $request->machine_quantity3, 'machine', ['lhs_or_rhs_machine' => 2]);
+                insertAggregatedItems($request, $site_plan_machine, $component_id_data, $request->labours_name3, $request->labours_quantity3, 'labour', ['lhs_or_rhs_labour' => 2]);
+            }
+            $data = 1;
+        }
+
+        $result = ($data == 1)
+            ? ['status' => true, 'msg' => 'Weekly plan added successfully']
+            : ['status' => false, 'msg' => 'Something went wrong'];
 
         echo json_encode($result);
     }

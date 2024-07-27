@@ -6,11 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
-    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    {{-- <title>Ela Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template"> --}}
+    <title>Admin - Admin Template</title>
+    <meta name="description" content="Admin - Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="assets/images/icons/favicon.ico" type="image/x-icon" /> 
+    <link rel="icon" href="assets/images/icons/favicon.ico" type="image/x-icon" />
     <!-- <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
     <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png"> -->
 
@@ -33,7 +35,7 @@
                 color: "red" !important;
                 /* text-transform: uppercase; */
             }
-            
+
         </style>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
@@ -49,7 +51,7 @@
                 </div>
                 <div class="login-form">
                     <form id="login_form" >
-                        @csrf 
+                        @csrf
                         <div class="form-group">
                             <label>USERNAME</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Email">
@@ -89,11 +91,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <!-- <script src="../public/assets/js/main.js"></script> -->
-    <script src="{{asset('assets/js/jquery.validate.js')}}"></script> 
+    <script src="{{asset('assets/js/jquery.validate.js')}}"></script>
 
     <script>
         var base_url='{{ url(\Request::route()->getPrefix()) }}';
-             
+
          $("#login_form").validate({
                 rules: {
                     username: {
@@ -101,7 +103,7 @@
                     },
                     password: {
                         required: true
-                    }                  
+                    }
             },
             messages: {
                     username: {
@@ -109,12 +111,12 @@
                     },
                     password: {
                         required: "Please Enter Password"
-                    }                   
-            },        
+                    }
+            },
             submitHandler: function (form, message) {
-             
-                    redUrl = base_url+'/login'; 
-                    
+
+                    redUrl = base_url+'/login';
+
 
                 $.ajax({
                     url: redUrl,
@@ -138,9 +140,9 @@
                             // fp1.close();
                             $(".login-err").css("color", "red");
                             $(".login-err").html(res.msg);
-                           
+
                             setTimeout(function () {
-                                // location.reload(); 
+                                // location.reload();
                             }, 3000);
                         }
 
@@ -151,18 +153,18 @@
                         // {
                         //     $(".login-err").css("color", "red");
                         //     $(".login-err").html("Server error ! refresh page.");
-                        // }   
+                        // }
                         // $(".btn-register").prop('disabled',false);
                         // $(".spinner-border").prop('hidden',true);
 
                         // setTimeout(function () {
-                        //         location.reload(); 
+                        //         location.reload();
                         //     }, 2000);
                     }
                 });
 
             }
-        }); 
+        });
  </script>
 
 </body>

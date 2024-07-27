@@ -167,7 +167,7 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage-list">Chainage List:</label>
+                                <label for="chainage-list">Chainage List:<span style="color:red">*</span></label>
                                 <select class="form-control select2 " id="chainage-list" name="chainage_list" style="width: 100%;">
                                     @foreach ($site_chainages as $site_chainages_row)
 
@@ -225,18 +225,18 @@
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="plan-start">Plan Start Date:</label>
+                                <label for="plan-start">Plan Start Date:<span style="color:red">*</span></label>
                                 {{-- <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="plan-start" name="plan-start" onchange="updateEndDate()"> --}}
-                                <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="plan-start" name="plan_start">
+                                <input class="form-control d_err" min="{{date('Y-m-d')}}" type="date" id="plan-start" name="plan_start">
 
                             </div>
                         </div>
 
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="plan-end">Plan End Date:</label>
+                                <label for="plan-end">Plan End Date:<span style="color:red">*</span></label>
                                 {{-- <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="plan-end" name="plan-end" disabled> --}}
-                                <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="plan-end" name="plan_end">
+                                <input class="form-control d_err" min="{{date('Y-m-d')}}" type="date" id="plan-end" name="plan_end">
                             </div>
                         </div>
                         {{-- <div class="col-xl-4 col-lg-4 col-md-6 col-12">
@@ -261,7 +261,7 @@
                         @if($data['from_length']=='0' || !empty($data['from_length']))
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage-from">Chainage From (Min {{$data['from_length']}} in METERS):</label>
+                                <label for="chainage-from">Chainage From (Min {{$data['from_length']}} in METERS):<span style="color:red">*</span></label>
                                 <input class="form-control" type="number" id="chainage-from" name="chainage_from" onkeyup="checkchainage({{$data['from_length']}},{{$data['to_length']}})">
                                 <span id="chainage_from_err" class="chainage_from_err error"></span>
                             </div>
@@ -273,7 +273,7 @@
                         @if($data['to_length'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage-to">Chainage To (Max {{$data['to_length']}} in METERS):</label>
+                                <label for="chainage-to">Chainage To (Max {{$data['to_length']}} in METERS):<span style="color:red">*</span></label>
                                 <input class="form-control" type="number" id="chainage-to" name="chainage_to" onkeyup="checkchainage({{$data['from_length']}},{{$data['to_length']}})">
                                 <span id="chainage_to_err" class="chainage_to_err error"></span>
                             </div>
@@ -287,7 +287,7 @@
                         @if($data['chainage_height'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage-to">Height (Max {{$data['chainage_height']}} in METERS) : </label>
+                                <label for="chainage-to">Height (Max {{$data['chainage_height']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_height" name="chainage_height" onkeyup="checkvalid(event,0,{{$data['chainage_height']}})">
                                 <span id="chainage_height_err" class="chainage_height_err error"></span>
                             </div>
@@ -300,7 +300,7 @@
                         @if($data['chainage_foundation_height'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage-to">Foundation Height (Max {{$data['chainage_foundation_height']}} in METERS) : </label>
+                                <label for="chainage-to">Foundation Height (Max {{$data['chainage_foundation_height']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_foundation_height" name="chainage_foundation_height" onkeyup="checkvalid(event,0,{{$data['chainage_foundation_height']}})">
                                 <span id="chainage_foundation_height_err" class="chainage_foundation_height_err error"></span>
                             </div>
@@ -312,7 +312,7 @@
                         @if($data['chainage_pier_height'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage_pier_height">Pier Height (Max {{$data['chainage_pier_height']}} in METERS) : </label>
+                                <label for="chainage_pier_height">Pier Height (Max {{$data['chainage_pier_height']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_pier_height" name="chainage_pier_height" onkeyup="checkvalid(event,0,{{$data['chainage_pier_height']}})">
                                 <span id="chainage_pier_height_err" class="chainage_pier_height_err error"></span>
                             </div>
@@ -324,7 +324,7 @@
                         @if($data['chainage_pier_cap_height'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage_pier_cap_height">Pier Cap Height (Max {{$data['chainage_pier_cap_height']}} in METERS) : </label>
+                                <label for="chainage_pier_cap_height">Pier Cap Height (Max {{$data['chainage_pier_cap_height']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_pier_cap_height" name="chainage_pier_cap_height" onkeyup="checkvalid(event,0,{{$data['chainage_pier_cap_height']}})">
                                 <span id="chainage_pier_cap_height_err" class="chainage_pier_cap_height_err error"></span>
                             </div>
@@ -337,7 +337,7 @@
                         @if($data['chainage_max_elevation_height'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage_max_elevation_height">Max Elevation Height (Max {{$data['chainage_max_elevation_height']}} in METERS) : </label>
+                                <label for="chainage_max_elevation_height">Max Elevation Height (Max {{$data['chainage_max_elevation_height']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_max_elevation_height" name="chainage_max_elevation_height" onkeyup="checkvalid(event,0,{{$data['chainage_max_elevation_height']}})">
                                 <span id="chainage_max_elevation_height_err" class="chainage_max_elevation_height_err error"></span>
                             </div>
@@ -349,7 +349,7 @@
                         @if($data['chainage_max_depth_at_center'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage_max_depth_at_center">Max Depth At Center (Max {{$data['chainage_max_depth_at_center']}} in METERS) : </label>
+                                <label for="chainage_max_depth_at_center">Max Depth At Center (Max {{$data['chainage_max_depth_at_center']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_max_depth_at_center" name="chainage_max_depth_at_center" onkeyup="checkvalid(event,0,{{$data['chainage_max_depth_at_center']}})">
                                 <span id="chainage_max_depth_at_center_err" class="chainage_max_depth_at_center_err error"></span>
                             </div>
@@ -363,7 +363,7 @@
                         @if($data['chainage_width'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage_width">Width (Max {{$data['chainage_width']}} in METERS) : </label>
+                                <label for="chainage_width">Width (Max {{$data['chainage_width']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_width" name="chainage_width" onkeyup="checkvalid(event,0,{{$data['chainage_width']}})">
                                 <span id="chainage_width_err" class="chainage_width_err error"></span>
                             </div>
@@ -375,7 +375,7 @@
                         @if($data['chainage_thickness'])
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="chainage_thickness">Thickness (Max {{$data['chainage_thickness']}} in METERS) : </label>
+                                <label for="chainage_thickness">Thickness (Max {{$data['chainage_thickness']}} in METERS) :<span style="color:red">*</span> </label>
                                 <input class="form-control" type="number" id="chainage_thickness" name="chainage_thickness" onkeyup="checkvalid(event,0,{{$data['chainage_thickness']}})">
                                 <span id="chainage_thickness_err" class="chainage_thickness_err error"></span>
                             </div>
@@ -390,7 +390,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             {{-- <p>{{$extra['extra_fname']}}: {{$extra['quantity']}} {{$extra['extra_unit']}}</p> --}}
                             <div class="section form-group">
-                                <label for="chainage_thickness">{{$extra['extra_fname']}} (Max {{$extra['quantity']}} in {{$extra['extra_unit']}}): </label>
+                                <label for="chainage_thickness">{{$extra['extra_fname']}} (Max {{$extra['quantity']}} in {{$extra['extra_unit']}}):<span style="color:red">*</span> </label>
                                 {{-- <input class="form-control" type="number" id="{{$extra['component_chainage_extra_field_id']}}" name="{{$extra['component_chainage_extra_field_id']}}_extra" onkeyup="checkvalid(event,0,{{$extra['quantity']}})" required> --}}
                                 <input class="form-control" type="number" id="{{$extra['component_chainage_extra_field_id']}}" name="extra[]" onkeyup="checkvalid(event,0,{{$extra['quantity']}})" required>
                                 <input class="form-control" type="hidden" id="extra_field_id_{{$extra['component_chainage_extra_field_id']}}" name="extra_field_id[]" value="{{$extra['component_chainage_extra_field_id']}}">
@@ -410,7 +410,7 @@
 
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label for="activity-list">Activity List:</label>
+                                <label for="activity-list">Activity List:<span style="color:red">*</span></label>
                                 {{-- <select id="activity-list" class="select2 form-control"> --}}
                                 <select class="form-control select2" id="activity-list" name="activity_list" style="width: 100%;">
                                     {{-- <option value="activity1">Activity 1</option>
@@ -427,9 +427,11 @@
 
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                             <div class="section form-group">
-                                <label>Details :</label><br>
+                                <div class="">
+                                <label>Details :<span style="color:red">*</span></label><br>
                                 <label><input class="" type="radio" name="options" id="all" value="1"> Regular</label>
                                 <label><input class="" type="radio" name="options" id="lhs_rhs" value="2"> LHS and RHS</label>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -444,7 +446,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="material-name">Material Name:</label><br>
+                                                    <label for="material-name">Material Name:<span style="color:red">*</span></label><br>
                                                     {{-- <select class="select2 material-name form-control"> --}}
                                                     <select class="form-control select2 material-name" id="material-name" name="material_name[]" style="width: 100%;">
                                                         {{-- <option value="material1">Material 1</option>
@@ -459,7 +461,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="material-quantity">Quantity:</label>
+                                                    <label for="material-quantity">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="material-quantity form-control" name="material_quantity[]">
                                                 </div>
                                             </div>
@@ -475,7 +477,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="machine-name">Machine Name:</label><br>
+                                                    <label for="machine-name">Machine Name:<span style="color:red">*</span></label><br>
                                                     {{-- <select class="select2 machine-name form-control"> --}}
                                                     <select class="form-control select2 machine-name" id="machine-name" name="machine_name[]" style="width: 100%;">
                                                         {{-- <option value="machine1">Machine 1</option>
@@ -490,7 +492,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="machine-quantity">Quantity:</label>
+                                                    <label for="machine-quantity">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="machine-quantity form-control" name="machine_quantity[]">
                                                 </div>
                                             </div>
@@ -506,7 +508,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="labours-name">Labours Type:</label><br>
+                                                    <label for="labours-name">Labours Type:<span style="color:red">*</span></label><br>
                                                     {{-- <select class="select2 labours-name form-control"> --}}
                                                     <select class="form-control select2 labours-name" id="labours-name" name="labours_name[]" style="width: 100%;">
                                                         {{-- <option value="labours1">Labours 1</option>
@@ -522,7 +524,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="labours-quantity">Quantity:</label>
+                                                    <label for="labours-quantity">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="labours-quantity form-control" name="labours_quantity[]">
                                                 </div>
                                             </div>
@@ -542,13 +544,15 @@
 
                     <div id="lhs_rhs-div" class="hidden">
                         <div class="section form-group">
-                            <strong>Check Road LHS/RHS: </strong>
+                        <div class="">
+                            <label>Check Road LHS/RHS:<span style="color:red">*</span> </label><br>
                             {{-- <label><input type="checkbox" id="lhs"  name="lhs_and_rhs[]" value="1"> LHS</label>
                             <label><input type="checkbox" id="rhs" name="lhs_and_rhs[]" value="2"> RHS</label> --}}
 
-                            <label><input class="" type="radio" name="lhs_and_rhs" id="lhs" value="1"> LHS</label>
-                            <label><input class="" type="radio" name="lhs_and_rhs" id="rhs" value="2"> RHS</label>
-                            <label><input class="" type="radio" name="lhs_and_rhs" id="both" value="3"> Both</label>
+                            <input class="" type="radio" name="lhs_and_rhs" id="lhs" value="1"> <label>LHS</label>
+                            <input class="" type="radio" name="lhs_and_rhs" id="rhs" value="2"> <label>RHS</label>
+                            <input class="" type="radio" name="lhs_and_rhs" id="both" value="3"><label> Both</label>
+                        </div>
                         </div>
                     </div>
 
@@ -560,13 +564,13 @@
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                         <div class="section form-group">
-                                            <label for="lhs-start">LHS Start Date:</label>
+                                            <label for="lhs-start">LHS Start Date:<span style="color:red">*</span></label>
                                             <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="lhs-start" name="lhs_start2">
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                         <div class="section form-group">
-                                            <label for="lhs-end">LHS End Date:</label>
+                                            <label for="lhs-end">LHS End Date:<span style="color:red">*</span></label>
                                             <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="lhs-end" name="lhs_end2">
                                         </div>
                                     </div>
@@ -577,7 +581,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="material-name2">Material Name:</label>
+                                                    <label for="material-name2">Material Name:<span style="color:red">*</span></label>
                                                     {{-- <select class="select2 material-name2 form-control"> --}}
                                                     <select class="form-control select2 material-name2" id="material-name2" name="material_name2[]" style="width: 100%;">
                                                         {{-- <option value="material1">Material 1</option>
@@ -593,7 +597,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="material-quantity2">Quantity:</label>
+                                                    <label for="material-quantity2">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="material-quantity2 form-control" name="material_quantity2[]">
                                                 </div>
                                             </div>
@@ -609,7 +613,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="machine-name2">Machine Name:</label>
+                                                    <label for="machine-name2">Machine Name:<span style="color:red">*</span></label>
                                                     {{-- <select class="select2 machine-name2 form-control"> --}}
                                                     <select class="form-control select2 machine-name2" id="machine-name2" name="machine_name2[]" style="width: 100%;">
                                                         {{-- <option value="machine1">Machine 1</option>
@@ -624,7 +628,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="machine-quantity2">Quantity:</label>
+                                                    <label for="machine-quantity2">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="machine-quantity2 form-control" name="machine_quantity2[]">
                                                 </div>
                                             </div>
@@ -640,7 +644,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="labours-name2">Labours Type:</label>
+                                                    <label for="labours-name2">Labours Type:<span style="color:red">*</span></label>
                                                     {{-- <select class="select2 labours-name2 form-control"> --}}
                                                     <select class="form-control select2 labours-name2" id="labours-name2" name="labours_name2[]" style="width: 100%;">
                                                         {{-- <option value="labours1">Labours 1</option>
@@ -655,7 +659,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="labours-quantity2">Quantity:</label>
+                                                    <label for="labours-quantity2">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="labours-quantity2 form-control" name="labours_quantity2[]">
                                                 </div>
                                             </div>
@@ -680,13 +684,13 @@
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                         <div class="section form-group">
-                                            <label for="rhs-start">RHS Start Date:</label>
+                                            <label for="rhs-start">RHS Start Date:<span style="color:red">*</span></label>
                                             <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="rhs-start" name="rhs_start3">
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                         <div class="section form-group">
-                                            <label for="rhs-end">RHS End Date:</label>
+                                            <label for="rhs-end">RHS End Date:<span style="color:red">*</span></label>
                                             <input class="form-control" min="{{date('Y-m-d')}}" type="date" id="rhs-end" name="rhs_end3">
                                         </div>
                                     </div>
@@ -697,7 +701,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="material-name3">Material Name:</label>
+                                                    <label for="material-name3">Material Name:<span style="color:red">*</span></label>
                                                     {{-- <select class="select2 material-name3 form-control"> --}}
                                                     <select class="form-control select2 material-name3" id="material-name3" name="material_name3[]" style="width: 100%;">
                                                         {{-- <option value="material1">Material 1</option>
@@ -712,7 +716,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="material-quantity3">Quantity:</label>
+                                                    <label for="material-quantity3">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="material-quantity3 form-control" name="material_quantity3[]">
                                                 </div>
                                             </div>
@@ -728,7 +732,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="machine-name3">Machine Name:</label>
+                                                    <label for="machine-name3">Machine Name:<span style="color:red">*</span></label>
                                                     {{-- <select class="select2 machine-name3 form-control"> --}}
                                                     <select class="form-control select2 machine-name3" id="machine-name3" name="machine_name3[]" style="width: 100%;">
                                                         {{-- <option value="machine1">Machine 1</option>
@@ -744,7 +748,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="machine-quantity3">Quantity:</label>
+                                                    <label for="machine-quantity3">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="machine-quantity3 form-control" name="machine_quantity3[]">
                                                 </div>
                                             </div>
@@ -760,7 +764,7 @@
                                         <div class="row">
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="labours-name3">Labours Type:</label>
+                                                    <label for="labours-name3">Labours Type:<span style="color:red">*</span></label>
                                                     {{-- <select class="select2 labours-name3 form-control"> --}}
                                                     <select class="form-control select2 labours-name3" id="labours-name3" name="labours_name3[]" style="width: 100%;">
                                                         {{-- <option value="labours1">Labours 1</option>
@@ -775,7 +779,7 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                                                 <div class="section form-group">
-                                                    <label for="labours-quantity3">Quantity:</label>
+                                                    <label for="labours-quantity3">Quantity:<span style="color:red">*</span></label>
                                                     <input type="number" class="labours-quantity3 form-control" name="labours_quantity3[]">
                                                 </div>
                                             </div>
@@ -952,7 +956,7 @@
                 `<div class="row">
         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
             <div class="section form-group">
-                <label for="${className}-name">${className.charAt(0).toUpperCase() + className.slice(1)} Name:</label>
+                <label for="${className}-name">${className.charAt(0).toUpperCase() + className.slice(1)} Name:<span style="color:red">*</span></label>
                 <select class="form-control select2 ${className}-name" name="${className}_name[]"     style="width: 100%;">`;
 
             // Loop through loopArray to generate options
@@ -978,7 +982,7 @@
         </div>
         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
             <div class="section form-group">
-                <label for="${className}-quantity">Quantity:</label>
+                <label for="${className}-quantity">Quantity:<span style="color:red">*</span></label>
                 <input type="number" class="${className}-quantity form-control" name="${className}_quantity[]">
             </div>
         </div>
@@ -1036,7 +1040,7 @@
                 `<div class="row">
                     <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                         <div class="section form-group">
-                            <label for="${className}-name2">${className.charAt(0).toUpperCase() + className.slice(1)} Name:</label>
+                            <label for="${className}-name2">${className.charAt(0).toUpperCase() + className.slice(1)} Name:<span style="color:red">*</span></label>
                             <select class="form-control select2 ${className}-name2" name="${className}_name2[]"     style="width: 100%;">`;
 
             // Loop through loopArray to generate options
@@ -1062,7 +1066,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                         <div class="section form-group">
-                            <label for="${className}-quantity2">Quantity:</label>
+                            <label for="${className}-quantity2">Quantity:<span style="color:red">*</span></label>
                             <input type="number" class="${className}-quantity2 form-control" name="${className}_quantity2[]">
                         </div>
                     </div>
@@ -1123,7 +1127,7 @@
                 `<div class="row">
      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
          <div class="section form-group">
-             <label for="${className}-name3">${className.charAt(0).toUpperCase() + className.slice(1)} Name:</label>
+             <label for="${className}-name3">${className.charAt(0).toUpperCase() + className.slice(1)} Name:<span style="color:red">*</span></label>
              <select class="form-control select2 ${className}-name3" name="${className}_name3[]"     style="width: 100%;">`;
 
             // Loop through loopArray to generate options
@@ -1149,7 +1153,7 @@
      </div>
      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
          <div class="section form-group">
-             <label for="${className}-quantity3">Quantity:</label>
+             <label for="${className}-quantity3">Quantity:<span style="color:red">*</span></label>
              <input type="number" class="${className}-quantity3 form-control" name="${className}_quantity3[]">
          </div>
      </div>
@@ -1445,7 +1449,7 @@
                 required: true
             },
 
-            "lhs_and_rhs[]": {
+            "lhs_and_rhs": {
                 // required: function(element) {
                 // return $('#options').val() == 2;
                 // }
@@ -1470,11 +1474,133 @@
 
         }
         , messages: {
+            "chainage_list": {
+                required: "Please Select Component"
+            }
+            , "activity_list": {
+                required: "Please Select Activity"
+            }
+            , "plan_start": {
+                required: "Please Select Plan Start Date"
+            }
+            , "plan_end": {
+                required: "Please Select Plan End Date"
+            }
+            , "chainage_from": {
+                required: "Please Enter Chainage From"
+            }
+            , "chainage_to": {
+                required: "Please Enter Chainage To"
+            }
+            , "chainage_foundation_height": {
+                required: "Please Enter Chainage Foundation Height"
+            }
+            , "chainage_pier_height": {
+                required: "Please Enter Chainage Pier Height"
+            }
+            , "chainage_pier_cap_height": {
+                required: "Please Enter Chainage Pier Cap Height"
+            }
+            , "chainage_max_elevation_height": {
+                required: "Please Enter Chainage Max Elevation Height"
+            }
+            , "chainage_max_depth_at_center": {
+                required: "Please Enter Chainage Max Depth Center"
+            }
+            , "chainage_width": {
+                required: "Please Enter Width"
+            }
+            , "chainage_thickness": {
+                required: "Please Enter Thickness"
+            },
+            "chainage_height": {
+                required: "Please Enter Height"
+            },
 
+            "material_name[]": {
+                required: "Please Select Material"
+            }
+            , "material_quantity[]": {
+                required: "Please Enter Material Quantity"
+            }
+            , "machine_name[]": {
+                required: "Please Select Machine"
+            }
+            , "machine_quantity[]": {
+                required: "Please Enter Machine Quantity"
+            }
+            , "labours_name[]": {
+                required: "Please Select Labour Type"
+            }
+            , "labours_quantity[]": {
+                required: "Please Enter Labours Quantity"
+            },
+
+
+            "material_name2[]": {
+                required: "Please Select Material"
+            }
+            , "material_quantity2[]": {
+                required: "Please Enter Material Quantity"
+            }
+            , "machine_name2[]": {
+                required: "Please Select Machine"
+            }
+            , "machine_quantity2[]": {
+                required: "Please Enter Machine Quantity"
+            }
+            , "labours_name2[]": {
+                required: "Please Select Labour Type"
+            }
+            , "labours_quantity2[]": {
+                required: "Please Enter Labours Quantity"
+            },
+
+
+            "material_name3[]": {
+                required: "Please Select Material"
+            }
+            , "material_quantity3[]": {
+                required: "Please Enter Material Quantity"
+            }
+            , "machine_name3[]": {
+                required: "Please Select Machine"
+            }
+            , "machine_quantity3[]": {
+                required: "Please Enter Machine Quantity"
+            }
+            , "labours_name3[]": {
+                required: "Please Select Labour Type"
+            }
+            , "labours_quantity3[]": {
+                required: "Please Enter Labours Quantity"
+            },
+
+            "lhs_start2": {
+                required: "Please Select Start Date"
+            }
+            , "lhs_end2": {
+                required: "Please Select End Date"
+            }
+            , "rhs_start3": {
+                required: "Please Select Start Date"
+            }
+            , "rhs_end3": {
+                required: "Please Select End Date"
+            },
+
+            "lhs_and_rhs": {
+
+                required: "Please Select Option"
+            },
+            options: {
+                required: "Please Select Option"
+            }
 
         }
         , errorPlacement: function(error, e) {
             e.parents('.form-group').append(error);
+
         }
         , submitHandler: function(form, message) {
             redUrl = base_url + '/save-weekly-plan';

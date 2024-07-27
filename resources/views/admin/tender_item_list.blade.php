@@ -131,15 +131,15 @@
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="tender_item_info" class=" form-control-label">Tender Item Description</label>
+                                        <label for="tender_item_info" class=" form-control-label">Tender Item Description<span style="color:red">*</span></label>
                                         <textarea type="text" id="tender_item_info" name="tender_item_info" placeholder="Enter Description" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tender_item_qty" class=" form-control-label">Total Quantity</label>
+                                        <label for="tender_item_qty" class=" form-control-label">Total Quantity<span style="color:red">*</span></label>
                                         <input type="number" min=0 id="tender_item_qty" name="tender_item_qty" placeholder="Total Quantity" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="tender_item_cost" class=" form-control-label">Cost per Unit</label>
+                                        <label for="tender_item_cost" class=" form-control-label">Cost per Unit<span style="color:red">*</span></label>
                                         <input type="number" min=0 id="tender_item_cost" name="tender_item_cost" placeholder="Enter cost per unit" class="form-control">
                                     </div>
                                 </div>
@@ -147,7 +147,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="tender_item_unit" class=" form-control-label">Unit TYPE</label>
+                                        <label for="tender_item_unit" class=" form-control-label">Unit TYPE<span style="color:red">*</span></label>
                                         <select class="form-control select2 tender_item_unit" id="tender_item_unit" name="tender_item_unit" multiple="multiple"  style="width: 100%">
                                             {{-- <option value="">Select</option> --}}
 
@@ -161,9 +161,9 @@
                             </div>
 
                             <div class="row">
-                                    <div class="col-lg-6">
-                                        <label for="is_active" class="form-control-label">Is Active ?</label>
-                                        <div class="form-group">
+                                    <div class="col-lg-6 form-group">
+                                        <label for="is_active" class="form-control-label">Is Active ?<span style="color:red">*</span></label>
+                                        <div class="">
 
                                         <div class="form-check form-check-inline">
                                         <input class="form-check-input" id="yes" type="radio" name="is_active" id="inlineRadio1" value="1">
@@ -377,6 +377,21 @@
 
         }
         , messages: {
+            tender_item_info: {
+                required: "Please Enter Description"
+            }
+            , tender_item_qty: {
+                required: "Please Enter Tender Item Quantity"
+            }
+            , tender_item_cost: {
+                required: "Please Enter Tender Item Cost"
+            }
+            , tender_item_unit: {
+                required: "Please Select Tender Item Unit"
+            },
+            is_active:{
+                required:"Please Select Option"
+            }
 
         }
         , submitHandler: function(form, message) {

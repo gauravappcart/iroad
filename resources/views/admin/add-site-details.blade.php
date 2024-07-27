@@ -140,7 +140,7 @@
                                         <strong class="card-title">Data Table</strong>
                             </div> --><!-- .card Header-->
                             <div class="card-body">
-                            <form id="component_chainage">
+                            <form id="component_chainage" name="component_chainage">
                         @csrf
 
                         <input type="hidden" value="{{ $site['site_id'] }}" id="site_id" name="site_id">
@@ -246,9 +246,9 @@
                                                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                                                     @foreach($road_components as $rc_key=>$component)
-                                                    <a class="nav-link" id="v-pills-home-tab{{ $rc_key }}" data-toggle="pill" href="#v-pills-home{{ $rc_key }}" role="tab" aria-controls="v-pills-home{{ $rc_key }}" aria-selected="true">
+                                                    <a class="nav-link {{$component['component_id'] }}-item" id="v-pills-home-tab{{ $rc_key }}" data-toggle="pill" href="#v-pills-home{{ $rc_key }}" role="tab" aria-controls="v-pills-home{{ $rc_key }}" aria-selected="true">
                                                         <!-- Home -->
-                                                        <div class="col-lg-12 col-md-12 col-sm-12" id="{{ $component['component_id'] }}">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 {{$rc_key}}" id="{{ $component['component_id'] }}">
                                                             <div class="components-img" id="drag{{ $component['component_id'] }}" draggable="true" ondragstart="drag(event)">
                                                                 @if($component['component_class'])
                                                                 <h5><span class="icon {{ $component['component_class'] }}"></span><span class="text">{{ $component['component_name'] }}</span></h5>
@@ -277,7 +277,7 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-12">
                                                                         <div class="form-group">
-                                                                            <label for="chainage_block" class=" form-control-label">Enter No Of {{ $component['component_name'] }} Components</label>
+                                                                            <label for="chainage_block" class=" form-control-label">Enter No Of {{ $component['component_name'] }} Components<span style="color:red">*</span></label>
                                                                             <input type="text" name="no_of_chainage"  placeholder="Enter No Of {{ $component['component_name'] }} Components" class="form-control no_of_chainage">
                                                                         </div>
                                                                     </div>
@@ -291,6 +291,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" id="btnsubmit" class="btn btn-primary"><span id="btn_title">Submit</span></button>
+                                        </div>
+
+                                        </form>
                                     </div>
 
                                     <div id="second" class="tab-pane fade in">
@@ -510,12 +516,12 @@
                         <div class="row text-center"><div class="col-lg-12 chainage-msg"></div></div>
                         </div>
 
-                        <div class="modal-footer">
+                        {{-- <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="submit" id="btnsubmit" class="btn btn-primary"><span id="btn_title">Submit</span></button>
                         </div>
 
-                        </form>
+                        </form> --}}
                             </div><!-- .card body -->
                         </div><!-- .card -->
                     </div><!-- .col-md-12 -->
@@ -548,13 +554,13 @@
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="form-group fromlength"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">FROM</label>
+                                            <label class="control-label col-sm-2">FROM<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number" min=0 name="fromlength" id="from" class="form-control" placeholder="Enter data in meters" style="margin:0" required />
                                             </div>
                                         </div>
                                         <div class="form-group tolength"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">TO</label>
+                                            <label class="control-label col-sm-2">TO<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="tolength" id="to" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
@@ -562,7 +568,7 @@
                                                     {{-- ------------------------------------ --}}
 
                                                     <div class="form-group chainage_height"  style="margin-bottom:15px;display:none">
-                                                        <label class="control-label col-sm-2">Height</label>
+                                                        <label class="control-label col-sm-2">Height<span style="color:red">*</span></label>
                                                         <div class="col-sm-10">
                                                         <input type="number"  min=0 name="chainage_height" id="chainage_height" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                                         </div>
@@ -571,49 +577,49 @@
 
 
                                         <div class="form-group chainage_foundation_height"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">chainage_foundation_height</label>
+                                            <label class="control-label col-sm-2">Chainage Foundation Height<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="chainage_foundation_height" id="chainage_foundation_height" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group chainage_pier_height"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">chainage_pier_height</label>
+                                            <label class="control-label col-sm-2">Chainage Pier Height<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="chainage_pier_height" id="chainage_pier_height" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group chainage_pier_cap_height"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">chainage_pier_cap_height</label>
+                                            <label class="control-label col-sm-2">Chainage Pier Cap Height<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="chainage_pier_cap_height" id="chainage_pier_cap_height" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group chainage_max_elevation_height"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">chainage_max_elevation_height</label>
+                                            <label class="control-label col-sm-2">Chainage Max Elevation Height<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="chainage_max_elevation_height" id="chainage_max_elevation_height" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group chainage_max_depth_at_center"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">chainage_max_depth_at_center</label>
+                                            <label class="control-label col-sm-2">Chainage Max Depth At Center<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="chainage_max_depth_at_center" id="chainage_max_depth_at_center" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group chainage_width"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">chainage_width</label>
+                                            <label class="control-label col-sm-2">Chainage Width<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="chainage_width" id="chainage_width" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
                                         </div>
 
                                         <div class="form-group chainage_thickness"  style="margin-bottom:15px;display:none">
-                                            <label class="control-label col-sm-2">chainage_thickness</label>
+                                            <label class="control-label col-sm-2">Chainage Thickness<span style="color:red">*</span></label>
                                             <div class="col-sm-10">
                                             <input type="number"  min=0 name="chainage_thickness" id="chainage_thickness" class="form-control" placeholder="Enter data in meters" style="margin:0" required/>
                                             </div>
@@ -699,6 +705,57 @@
           });
 
           $(".nav-link").click(function(){
+
+//             var classes = $(this).attr('class').split(' ');
+
+// // Find the class that ends with '-item'
+// var targetClass = classes.find(cls => cls.endsWith('-item'));
+
+// // Extract the string before '-item'
+// if (targetClass) {
+//     var extractedString = targetClass.split('-')[0];
+//     console.log('Target class:', targetClass);
+//     console.log('Extracted string:', extractedString);
+//     $(this).on('focusout',function(){
+//         var combinedString = "div_"+extractedString ;
+//         alert(combinedString)
+//         $('.'+combinedString).remove()
+//     })
+// }
+
+
+
+// Get all classes of the clicked element
+var classes = $(this).attr('class').split(' ');
+
+// Find the class that ends with '-item'
+var targetClass = classes.find(cls => cls.endsWith('-item'));
+
+// Extract the string before '-item'
+if (targetClass) {
+    var extractedString = targetClass.split('-')[0];
+    console.log('Target class:', targetClass);
+    console.log('Extracted string:', extractedString);
+
+    // Combine extractedString with another string
+    // var combinedString = extractedString + '-combined';
+    var combinedString = "div_"+extractedString ;
+    // alert(combinedString)
+    console.log('Combined string:', combinedString);
+
+    // Find and remove all elements with classes containing '-combined' except for the one with combinedString
+    $('.action').each(function() {
+        var elementClasses = $(this).attr('class').split(' ');
+        var hasCombinedClass = elementClasses.some(cls => cls.includes('div_'));
+
+        if (hasCombinedClass && !elementClasses.includes(combinedString)) {
+            $(this).remove();
+        }
+    });
+}
+
+
+
                 // Holds the product ID of the clicked element
                  $('.nav-link').find('.components-img').removeClass('active');
                  $(this).find('.components-img').addClass('active');
@@ -784,7 +841,7 @@
                     var prev_chainage_count=$(this).parent().parent().parent().siblings().length;
                     // alert(prev_chainage_count)
                     var activity='';
-                    activity+='<div class="border border-primary mb-1 row comp-id' + comp_id + '" >';
+                    activity+='<div class="action div_'+comp_id+' border border-primary mb-1 row comp-id' + comp_id + '" >';
 
 
                         if(comp_id==6 ){
@@ -792,21 +849,21 @@
 
                     activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_from'+comp_id+prev_chainage_count+'" class=" form-control-label">FOUNDATION HEIGHT</label>';
+                    activity+='<label for="chainage_from'+comp_id+prev_chainage_count+'" class=" form-control-label">FOUNDATION HEIGHT<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_foundation_height[]" parentClass="comp-id' + comp_id + '" id="chainage_foundation_height'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_from" >';
                     activity+='</div>';
                     activity+='</div>';
 
                     activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">PIER HEIGHT</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">PIER HEIGHT<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_pier_height[]" parentClass="comp-id' + comp_id + '" id="chainage_pier_height'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
 
                     activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">PIER CAP HEIGHT</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">PIER CAP HEIGHT<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_pier_cap_height[]" parentClass="comp-id' + comp_id + '" id="chainage_pier_cap_height'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
@@ -816,13 +873,13 @@
                     {
                     activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_from'+comp_id+prev_chainage_count+'" class=" form-control-label">FROM</label>';
+                    activity+='<label for="chainage_from'+comp_id+prev_chainage_count+'" class=" form-control-label">FROM<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_from[]" parentClass="comp-id' + comp_id + '" id="chainage_from'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_from" >';
                     activity+='</div>';
                     activity+='</div>';
                     activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">TO</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">TO<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_to[]" parentClass="comp-id' + comp_id + '" id="chainage_to'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
@@ -841,7 +898,7 @@
 
                             activity+='<div class="col-lg-5">';
                             activity+='<div class="form-group">';
-                            activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'</label>';
+                            activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'<span style="color:red">*</span></label>';
                             // activity+='<input type="text" name="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'[]" parentClass="comp-id' + comp_id + '" id="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+''+comp_id+prev_chainage_count+'" placeholder="Enter chainage in '+road_components_d[j]['associated_extra_fields'][k]['unit']+'" class="form-control chainage_to" >';
                             activity+='<input type="text" name="associated_extra_fields[]" extras_dynamic="'+road_components_d[j]['associated_extra_fields'][k]['component_extra_field_id']+'"   extras_dynamic_field_name="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'"  extras_dynamic_unit="'+road_components_d[j]['associated_extra_fields'][k]['unit']+'"     parentClass="comp-id' + comp_id + '" id="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+''+comp_id+prev_chainage_count+'" placeholder="Enter data in '+road_components_d[j]['associated_extra_fields'][k]['extra_unit']+'" class="form-control chainage_to extras" >';
                             activity+='</div>';
@@ -853,7 +910,7 @@
 
                         activity+='<div class="col-lg-5">';
                         activity+='<div class="form-group">';
-                        activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'</label>';
+                        activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'<span style="color:red">*</span></label>';
                         // activity+='<input type="text" name="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'[]" parentClass="comp-id' + comp_id + '" id="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+''+comp_id+prev_chainage_count+'" placeholder="Enter chainage in '+road_components_d[j]['associated_extra_fields'][k]['unit']+'" class="form-control chainage_to" >';
                         activity+='<input type="text" name="associated_extra_fields[]" extras_dynamic="'+road_components_d[j]['associated_extra_fields'][k]['component_extra_field_id']+'"  extras_dynamic_field_name="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+'"  extras_dynamic_unit="'+road_components_d[j]['associated_extra_fields'][k]['unit']+'"  parentClass="comp-id' + comp_id + '" id="'+road_components_d[j]['associated_extra_fields'][k]['field_name']+''+comp_id+prev_chainage_count+'" placeholder="Enter data in '+road_components_d[j]['associated_extra_fields'][k]['extra_unit']+'" class="form-control chainage_to extras" >';
                         activity+='</div>';
@@ -877,7 +934,7 @@
                 if(comp_id==3){
                         activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">HEIGHT</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">HEIGHT<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_height[]" parentClass="comp-id' + comp_id + '" id="chainage_height'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
@@ -886,7 +943,7 @@
                     if(comp_id==2){
                         activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">MAX ELEVATION HEIGHT</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">MAX ELEVATION HEIGHT<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_max_elevation_height[]" parentClass="comp-id' + comp_id + '" id="chainage_max_elevation_height'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
@@ -894,7 +951,7 @@
                     if(comp_id==4){
                         activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">MAX DEPTH AT CENTER</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">MAX DEPTH AT CENTER<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_max_depth_at_center[]" parentClass="comp-id' + comp_id + '" id="chainage_max_depth_at_center'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
@@ -902,14 +959,14 @@
                     if(comp_id==7){
                         activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">WIDTH</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">WIDTH<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_width[]" parentClass="comp-id' + comp_id + '" id="chainage_width'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
 
                     activity+='<div class="col-lg-5">';
                     activity+='<div class="form-group">';
-                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">THICKNESS</label>';
+                    activity+='<label for="chainage_to'+comp_id+prev_chainage_count+'" class=" form-control-label">THICKNESS<span style="color:red">*</span></label>';
                     activity+='<input type="text" name="chainage_thickness[]" parentClass="comp-id' + comp_id + '" id="chainage_thickness'+comp_id+prev_chainage_count+'" placeholder="Enter data in meters" class="form-control chainage_to" >';
                     activity+='</div>';
                     activity+='</div>';
@@ -951,57 +1008,87 @@
     var form=$("#component_chainage");
     form.validate({
         rules: {
-            // 'no_of_chainage': {
-            //     // required: true,
-            //     // number: true,
-            // },
-            // 'chainage_from[]': {
-            //     number: true,
-            //     required: true,
-            // },
-            // 'chainage_to[]': {
-            //     number: true,
-            //     required: true,
-            // },
-            //   'chainage_thickness[]': {
-            //     number: true,
-            //     required:true
-            // },
-            // 'chainage_width[]': {
-            //     number: true,
-            //     required:true
-            // },
-            // 'chainage_max_depth_at_center[]': {
-            //     number: true,
-            //     required:true
-            // },
-            // 'chainage_max_elevation_height[]': {
-            //     number: true,
-            //     required:true
-            // },
-            // 'chainage_pier_cap_height[]': {
-            //     number: true,
-            //     required:true
-            // },
-            // 'chainage_pier_height[]': {
-            //     number: true,
-            //     required:true
-            // },
-            // 'chainage_foundation_height[]': {
-            //     number: true,
-            //     required:true
-            // },
+            'no_of_chainage': {
+                // required: true,
+                // number: true,
+            },
+            'chainage_from[]': {
+                number: true,
+                required: true,
+            },
+            'chainage_to[]': {
+                number: true,
+                required: true,
+            },
+              'chainage_thickness[]': {
+                number: true,
+                required:true
+            },
+            'chainage_width[]': {
+                number: true,
+                required:true
+            },
+            'chainage_max_depth_at_center[]': {
+                number: true,
+                required:true
+            },
+            'chainage_max_elevation_height[]': {
+                number: true,
+                required:true
+            },
+            'chainage_pier_cap_height[]': {
+                number: true,
+                required:true
+            },
+            'chainage_pier_height[]': {
+                number: true,
+                required:true
+            },
+            'chainage_foundation_height[]': {
+                number: true,
+                required:true
+            },
         },
         messages: {
-            // 'no_of': {
-            //     required: "Enter only number.",
-            // },
-            // 'chainage_from[]': {
-            //     number: "Enter only number.",
-            // },
-            // 'chainage_to[]': {
-            //     number: "Enter only number.",
-            // }
+            'no_of': {
+                required: "Enter Only Number.",
+            },
+            'chainage_from[]': {
+                number: "Enter Only Number.",
+                required:"Enter Chainage From"
+            },
+            'chainage_to[]': {
+                number: "Enter Only Number.",
+                required:"Enter Chainage To"
+            },
+              'chainage_thickness[]': {
+                number: "Enter Only Number.",
+                required:"Enter Thickness"
+            },
+            'chainage_width[]': {
+                number: "Enter Only Number.",
+                required:"Enter Width"
+            },
+            'chainage_max_depth_at_center[]': {
+                number: "Enter Only Number.",
+                 required:"Enter Max Depth At Center"
+            },
+            'chainage_max_elevation_height[]': {
+                number: "Enter Only Number.",
+                 required:"Enter Max Elevation Height"
+            },
+            'chainage_pier_cap_height[]': {
+                number: "Enter Only Number.",
+                required:"Enter Pier Cap Height"
+            },
+            'chainage_pier_height[]': {
+                number: "Enter Only Number.",
+                required:"Enter Pier Height"
+            },
+            'chainage_foundation_height[]': {
+                number: "Enter Only Number.",
+                required:"Enter Foundation Height"
+            },
         },
         submitHandler: function (form, message) {
             console.log("submit form");
@@ -1191,7 +1278,7 @@
                     $.each(extra_fields, function(index, field) {
                         console.log(extra_fields);
                                var fieldHtml ='<div class="form-group tolength"  style="margin-bottom:15px;">'+
-                                            '<label class="control-label col">'+ field.field_name+ '</label>'+
+                                            '<label class="control-label col">'+ field.field_name+ '<span style="color:red">*</span></label>'+
                                             '<div class="col-sm-">'+
                                             '<input type="text" name="edit_extra_field_name[]"   edit_extrafield_id="'+field.component_chainage_extra_field_id+'"   id="'+field.field_name+'_'+index+'" class="form-control" placeholder="Enter Chainage in '+field.extra_unit+'"  value="' + field.quantity + '" style="margin:0" required/>'+
                                             '<input type="hidden" name="component_chainage_extra_field_id[]" id="component_chainage_extra_field_id_'+index+'" class="form-control"  value="' + field.component_chainage_extra_field_id + '" style="margin:0" required/>'+
@@ -1228,7 +1315,12 @@
             }
         },
         messages: {
-
+            fromlength: {
+                required: "Please Enter From Data"
+            },
+            tolength: {
+                required: "Please Enter To Data"
+            }
         }
 
     });

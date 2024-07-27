@@ -439,23 +439,23 @@ $("#add_vendors").validate({
         vendor_name: {
           required: "Please Enter Vendor Name",
 
-          maxlength:"Vendor Name should be maximum of 30 Charachers"
+          maxlength:"Vendor Name Should Be Maximum Of 30 Charachers"
         },
         shop_name: {
           required: "Please Enter Shop Name",
 
-          maxlength:"Shop Name should be maximum of 30 Charachers"
+          maxlength:"Shop Name Should Be Maximum Of 30 Charachers"
         },
         mobile: {
           required: "Please Enter Mobile Number",
-          minlength:"Mobile number should be 10 digits",
-          maxlength:"Mobile number should be 10 digits",
+          minlength:"Mobile Number Should Be 10 Digits",
+          maxlength:"Mobile Number Should Be 10 Digits",
 //          required: "Please enter Mobile Number"
-          indianMobile: "Please enter a valid Indian mobile number"
+          indianMobile: "Please Enter A Valid Indian Mobile Number"
         },
         email_id: {
-          required: "Please enter Email Id",
-          email: "Please enter valid Email Id"
+          required: "Please Enter Email Id",
+          email: "Please Enter Valid Email Id"
         },
         material_type: {
           required: "Please Select Material Type"

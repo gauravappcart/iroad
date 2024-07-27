@@ -189,6 +189,7 @@ class SiteService
     }
     public function add_component_chainage($request)
     {
+        // dd($request['chainage_data']);
         // dd($request);
         // return false;
         $componentsChainage=json_decode($request['chainage_data']);

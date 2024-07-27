@@ -863,78 +863,78 @@
             , messages: {
 
                 asset_name: {
-                    required: "Asset Name is required"
+                    required: "Asset Name Is Required"
                 }
                 , put_to_use: {
-                    required: "Use Date is required"
+                    required: "Use Date Is Required"
                 }
                 , asset_group: {
-                    required: "Asset Group is required"
+                    required: "Asset Group Is Required"
                 }
                 , assetLocation: {
-                    required: "Select Asset location"
+                    required: "Select Asset Location"
                 }
                 , asset_life_years: {
-                    required: "Select Asset Life years"
+                    required: "Select Asset Life Years"
                 }
                 , end_life_date: {
-                    required: "End Life Date is required"
+                    required: "End Life Date Is Required"
                 }
                 , asset_quantity: {
-                    required: "Asset Quantity is required"
-                    , number: "Please enter numbers only"
+                    required: "Asset Quantity Is Required"
+                    , number: "Please Enter Numbers Only"
                 }
                 , purchase_value: {
-                    required: "Purchase Value is required"
-                    , number: "Please enter numbers only"
+                    required: "Purchase Value Is Required"
+                    , number: "Please Enter Numbers Only"
                 },
                 // vehvicle validation
                 type: {
-                    required: "Type is required"
+                    required: "Type Is Required"
                 }
                 , model_name: {
-                    required: "Model Name is required"
+                    required: "Model Name Is Required"
                 }
                 , profit_center: {
-                    required: "Profit Center is required"
+                    required: "Profit Center Is Required"
                 }
                 , owner: {
-                    required: "Owner is required"
+                    required: "Owner Is Required"
                 }
                 , make_type: {
-                    required: "Make Type is required"
+                    required: "Make Type Is Required"
                 }
                 , model_name: {
-                    required: "Make Type is required"
+                    required: "Make Type Is Required"
                 }
                 , vehicle_no: {
-                    required: "Vehicle No is required"
+                    required: "Vehicle No Is Required"
                 }
                 , vehicle_type: {
-                    required: "Vehicle Type is required"
+                    required: "Vehicle Type Is Required"
                 }
                 , book_value: {
-                    required: "Book Value is required"
+                    required: "Book Value Is Required"
                 }
                 , depreciation_value: {
-                    required: "Depreciation Value is required"
+                    required: "Depreciation Value Is Required"
                 }
                 , reading_in: {
-                    required: "Reading In is required"
+                    required: "Reading In Is Required"
                 }
                 , expected_reading: {
-                    required: "Expected Reading is required"
-                    , number: "Please enter numbers only"
+                    required: "Expected Reading Is Required"
+                    , number: "Please Enter Numbers Only"
                 }
                 , min_urea_alert: {
-                    required: "Minimum Urea Limit is required"
-                    , number: "Please enter numbers only"
+                    required: "Minimum Urea Limit Is Required"
+                    , number: "Please Enter Numbers Only"
                 }
                 , description: {
-                    required: "Description is required"
+                    required: "Description Is Required"
                 }
                 , status: {
-                    required: "Status is required"
+                    required: "Status Is Required"
                 }
                 //vehicle validation
             },

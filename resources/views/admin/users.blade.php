@@ -385,15 +385,15 @@
 
             first_name: {
               required: "Please Enter First Name",
-              lettersonly: "Your first name must contain only letters"
+              lettersonly: "Your First Name Must Contain Only Letters"
             },
             last_name: {
              required: "Please Enter Last Name",
-             lettersonly: "Your last name must contain only letters"
+             lettersonly: "Your Last Name Must Contain Only Letters"
             },
             mobile: {
               required: "Please Enter Mobile No",
-              indianMobile:"Please enter a valid Indian mobile number."
+              indianMobile:"Please Enter A Valid Indian Mobile Number."
             },
             email_id: {
                required: "Please Enter Email ID",

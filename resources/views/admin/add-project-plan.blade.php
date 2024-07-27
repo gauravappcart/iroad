@@ -133,7 +133,7 @@
                                         <div id="form-rows">
                                             @if(count($site_plan_labour)<=0) <div class="form-row mb-3 align-items-end dynamic-row">
                                                 <div class="col form-group">
-                                                    <label for="select-0">Labour Category</label>
+                                                    <label for="select-0">Labour Category<span style="color:red">*</span></label>
                                                     <select name="labour_type[]" id="select-0" class="form-control select2 labour_type" style="width: 200px;" required>
                                                         <option value="">Choose...</option>
                                                         @foreach ($labour as $row)
@@ -143,15 +143,15 @@
                                                     <input type=hidden name="site_plan_labour_id[]" value="">
                                                 </div>
                                                 <div class="col form-group">
-                                                    <label for="number1-0">No. of Person</label>
+                                                    <label for="number1-0">No. of Person<span style="color:red">*</span></label>
                                                     <input type="number" name="no_of_worker[]" id="number1-0" class="form-control no_of_worker">
                                                 </div>
                                                 <div class="col form-group">
-                                                    <label for="number2-0">Work Days / Person</label>
+                                                    <label for="number2-0">Work Days / Person<span style="color:red">*</span></label>
                                                     <input type="number" name="work_days[]" id="number2-0" class="form-control work_days">
                                                 </div>
                                                 <div class="col form-group">
-                                                    <label for="number2-0">Cost / Day</label>
+                                                    <label for="number2-0">Cost / Day<span style="color:red">*</span></label>
                                                     <input type="number" name="cost_days[]" id="number3-0" class="form-control cost_days">
                                                 </div>
                                                 <div class="col form-group">
@@ -169,7 +169,7 @@
                                         {{-- {{$data}} --}}
                                         <div class="form-row mb-3 align-items-end dynamic-row">
                                             <div class="col form-group">
-                                                <label for="select-0">Labour Category</label>
+                                                <label for="select-0">Labour Category<span style="color:red">*</span></label>
                                                 <select name="labour_type[]" id="select-0" class="form-control select2 labour_type" style="width: 200px;" required>
                                                     <option value="">Choose...</option>
                                                     @foreach ($labour as $row)
@@ -179,15 +179,15 @@
                                                 <input type=hidden name="site_plan_labour_id[]" value="{{$data->site_plan_labour_id}}">
                                             </div>
                                             <div class="col form-group">
-                                                <label for="number1-0">No. of Person</label>
+                                                <label for="number1-0">No. of Person<span style="color:red">*</span></label>
                                                 <input type="number" name="no_of_worker[]" id="number1-{{$loop->iteration-1}}" value="{{$data->no_of_worker}}" class="form-control no_of_worker">
                                             </div>
                                             <div class="col form-group">
-                                                <label for="number2-0">Work Days / Person</label>
+                                                <label for="number2-0">Work Days / Person<span style="color:red">*</span></label>
                                                 <input type="number" name="work_days[]" id="number2-{{$loop->iteration-1}}" value="{{$data->no_of_work_days}}" class="form-control work_days">
                                             </div>
                                             <div class="col form-group">
-                                                <label for="number2-0">Cost / Day</label>
+                                                <label for="number2-0">Cost / Day<span style="color:red">*</span></label>
                                                 <input type="number" name="cost_days[]" id="number3-{{$loop->iteration-1}}" value="{{$data->cost_per_day}}" class="form-control cost_days">
                                             </div>
                                             <div class="col form-group">
@@ -233,7 +233,7 @@
 
                             <div class="form-row mb-3 dynamic-row2">
                                 <div class="col form-group">
-                                    <label for="material_type-0">Material Type</label>
+                                    <label for="material_type-0">Material Type<span style="color:red">*</span></label>
                                     <select class="form-control select2 material_type" id="material_type-0" name="material_type[]">
                                         <option value="">Select an option</option>
                                         @foreach ($material_type as $row)
@@ -243,19 +243,19 @@
                                     <input type=hidden name="site_plan_material_id[]" value="">
                                 </div>
                                 <div class="col form-group">
-                                    <label for="material-0">Material</label>
+                                    <label for="material-0">Material<span style="color:red">*</span></label>
                                     <select class="form-control select2 select2-dependent" id="material-0" name="material[]" disabled>
                                         <option value="">Select an option</option>
                                     </select>
                                 </div>
                                 <div class="col form-group">
-                                    <label for="quantity-0">Quantity</label>
+                                    <label for="quantity-0">Quantity<span style="color:red">*</span></label>
                                     <input type="number" min="0" class="form-control" id="quantity-0" name="quantity[]" required>
                                     {{-- <input type="hidden" id="material_unit-0" name="material_unit[]">
                                                     <span id="material_unit_span-0" name="material_unit_span[]"></span> --}}
                                 </div>
                                 <div class="col form-group">
-                                    <label for="rate-0">Rate/unit</label>
+                                    <label for="rate-0">Rate/unit<span style="color:red">*</span></label>
                                     <input type="number" min="0" class="form-control" id="rate-0" name="rate[]" required>
                                     {{-- <input type="hidden" id="material_unit-0" name="material_unit[]">
                                                     <span id="material_unit_span-0" name="material_unit_span[]"></span> --}}
@@ -272,7 +272,7 @@
                             {{-- {{$data}} --}}
                             <div class="form-row mb-3 align-items-end dynamic-row2">
                                 <div class="col form-group">
-                                    <label for="select-0">Material Type</label>
+                                    <label for="select-0">Material Type<span style="color:red">*</span></label>
                                     <select name="material_type[]" id="select-{{$loop->iteration-1}}" class="form-control select2 material_type" style="width: 200px;" required>
                                         <option value="">Choose...</option>
                                         @foreach ($material_type as $row)
@@ -282,7 +282,7 @@
                                     <input type=hidden name="site_plan_material_id[]" value="{{$data->site_plan_material_id}}">
                                 </div>
                                 <div class="col form-group">
-                                    <label for="material-0">Material</label>
+                                    <label for="material-0">Material<span style="color:red">*</span></label>
                                     <select class="form-control select2 select2-dependent" id="material-{{$loop->iteration-1}}" name="material[]" disabled>
                                         <option value="">Choose...</option>
                                         @foreach ($materials as $row)
@@ -292,14 +292,14 @@
                                     </select>
                                 </div>
                                 <div class="col form-group">
-                                    <label for="quantity-0">Quantity</label>
+                                    <label for="quantity-0">Quantity<span style="color:red">*</span></label>
                                     <input type="number" min="0" class="form-control" id="quantity-{{$loop->iteration-1}}" name="quantity[]" value="{{$data->quantity}}" required>
                                     {{-- <input type="hidden" id="material_unit-0" name="material_unit[]">
                                                     <span id="material_unit_span-0" name="material_unit_span[]"></span> --}}
                                 </div>
                                 <div class="col form-group">
                                     {{-- <label for="quantity-0">Rate/{{$unit_name}}</label> --}}
-                                    <label for="rate-0">Rate/unit</label>
+                                    <label for="rate-0">Rate/unit<span style="color:red">*</span></label>
                                     <input type="number" min="0" class="form-control" id="rate-{{$loop->iteration-1}}" name="rate[]" value="{{$data->rate}}" required>
                                     {{-- <input type="hidden" id="material_unit-0" name="material_unit[]">
                                                     <span id="material_unit_span-0" name="material_unit_span[]"></span> --}}
@@ -486,7 +486,7 @@
                 <div id="form-rows8">
                     @if(count($site_plan_assets)<=0) <div class="form-row mb-3 align-items-end dynamic-row8">
                         <div class="col form-group">
-                            <label for="vehicle_type-0">Vehicle Types</label>
+                            <label for="vehicle_type-0">Vehicle Types<span style="color:red">*</span></label>
                             <select name="vehicle_type[]" id="vehicle_type-0" class="form-control select2 vehicle_type" style="width: 200px;" required>
                                 <option value="">Choose...</option>
                                 @foreach ($vehicle_types as $row)
@@ -496,15 +496,15 @@
                             <input type=hidden name="site_plan_vehical_type_id[]" value="">
                         </div>
                         <div class="col form-group">
-                            <label for="vehical_quantity-0">Quantity</label>
+                            <label for="vehical_quantity-0">Quantity<span style="color:red">*</span></label>
                             <input type="number" name="vehical_quantity[]" id="vehical_quantity-0" class="form-control vehical_quantity">
                         </div>
                         <div class="col form-group">
-                            <label for="time_hours-0">Estimated Time(hours)</label>
+                            <label for="time_hours-0">Estimated Time(hours)<span style="color:red">*</span></label>
                             <input type="number" name="time_hours[]" id="time_hours-0" class="form-control time_hours">
                         </div>
                         <div class="col form-group">
-                            <label for="cost_per_hour-0">Cost/Hour</label>
+                            <label for="cost_per_hour-0">Cost/Hour<span style="color:red">*</span></label>
                             <input type="number" name="cost_per_hour[]" id="cost_per_hour-0" class="form-control cost_per_hour">
                         </div>
                         <div class="col form-group">
@@ -522,7 +522,7 @@
                 {{-- {{$data}} --}}
                 <div class="form-row mb-3 align-items-end dynamic-row8">
                     <div class="col form-group">
-                        <label for="vehicle_type-0">Vehicle Types</label>
+                        <label for="vehicle_type-0">Vehicle Types<span style="color:red">*</span></label>
                         <select name="vehicle_type[]" id="select-0" class="form-control select2 vehicle_type" style="width: 200px;" required>
                             <option value="">Choose...</option>
                             @foreach ($vehicle_types as $row)
@@ -532,15 +532,15 @@
                         <input type=hidden name="site_plan_vehical_type_id[]" value="{{$data->site_plan_vehical_type_id}}">
                     </div>
                     <div class="col form-group">
-                        <label for="vehical_quantity-0">Quantity</label>
+                        <label for="vehical_quantity-0">Quantity<span style="color:red">*</span></label>
                         <input type="number" name="vehical_quantity[]" id="vehical_quantity-{{$loop->iteration-1}}" value="{{$data->vehical_quantity}}" class="form-control vehical_quantity">
                     </div>
                     <div class="col form-group">
-                        <label for="time_hours-0">Estimated Time(hours)</label>
+                        <label for="time_hours-0">Estimated Time(hours)<span style="color:red">*</span></label>
                         <input type="number" name="time_hours[]" id="time_hours-{{$loop->iteration-1}}" value="{{$data->time_hours}}" class="form-control time_hours">
                     </div>
                     <div class="col form-group">
-                        <label for="cost_per_hour-0">Cost/Hour</label>
+                        <label for="cost_per_hour-0">Cost/Hour<span style="color:red">*</span></label>
                         <input type="number" name="cost_per_hour[]" id="cost_per_hour-{{$loop->iteration-1}}" value="{{$data->cost_per_hour}}" class="form-control cost_per_hour">
                     </div>
                     <div class="col form-group">
@@ -628,7 +628,7 @@
                         @if(count($site_plan_departments)<=0)
                         <div class="form-row mb-3 dynamic-row4 ">
                             <div class="col-3 form-group">
-                                <label for="department-0">Department</label>
+                                <label for="department-0">Department<span style="color:red">*</span></label>
                                 <select class="form-control select2 department" id="department-0" name="department[]">
                                     <option value="">Select an option</option>
                                     @foreach ($departments as $row)
@@ -638,7 +638,7 @@
                                 <input type=hidden name="site_plan_department_id[]" value="">
                             </div>
                             <div class="col-3 form-group">
-                                <label for="user-0">User/Employee</label>
+                                <label for="user-0">User/Employee<span style="color:red">*</span></label>
                                 <select class="form-control select2 select2-dependent" id="user-0" name="user[]" disabled>
                                     <option value="">Select an option</option>
                                 </select>
@@ -810,14 +810,58 @@
         , rules: {
             "numbers_of_days[]": {
                 required: true
-            }
+            },
+            // "labour_type[]":{
+            //     required:true
+            // },
+            // "no_of_worker[]":{
+            //     required:true
+            // },
+            // "work_days[]":{
+            //     required:true
+            // },
+            // "cost_days[]":{
+            //     required:true
+            // },
+
+            // "material_type[]":{
+            //     required:true
+            // },
+            // "material[]":{
+            //     required:true
+            // },
+            // "quantity[]":{
+            //     required:true
+            // },
+            // "rate[]":{
+            //     required:true
+            // },
+            // "vehicle_type[]":{
+            //     required:true
+            // },
+            // "vehical_quantity[]":{
+            //     required:true
+            // },
+            // "time_hours[]":{
+            //     required:true
+            // },
+            // "cost_per_hour[]":{
+            //     required:true
+            // },
 
 
         }
         , messages: {
+            "numbers_of_days[]": {
+                required: "Enter Required Days"
+            },
+
+
+
 
         }
         , submitHandler: function(form, message) {
+            // alert('1')
             redUrl = base_url + '/add-project-plan-activity';
             $.ajax({
                 url: redUrl
@@ -905,7 +949,7 @@
         let newRow = `
         <div class="form-row mb-3 align-items-end dynamic-row">
             <div class="col form-group">
-                <label for="select-${index}">Labour Category</label>
+                <label for="select-${index}">Labour Category<span style="color:red">*</span></label>
                 <select name="labour_type[]" id="select-${index}" class="form-control select2 labour_type" style="width: 200px;" required>
                     <option value="">Choose...</option>
                     `
@@ -917,19 +961,19 @@
                 </select>
             </div>
             <div class="col form-group">
-                <label for="number1-${index}">No. of Person</label>
+                <label for="number1-${index}">No. of Person<span style="color:red">*</span></label>
                 <input type="number" name="no_of_worker[]" id="number1-${index}" class="form-control no_of_worker">
             </div>
             <div class="col form-group">
-                <label for="number2-${index}">Work Days / Person</label>
+                <label for="number2-${index}">Work Days / Person<span style="color:red">*</span></label>
                 <input type="number" name="work_days[]" id="number2-${index}" class="form-control work_days">
             </div>
             <div class="col form-group">
-                <label for="number2-${index}">Cost / Day</label>
+                <label for="number2-${index}">Cost / Day<span style="color:red">*</span></label>
                 <input type="number" name="cost_days[]" id="number3-${index}" class="form-control cost_days">
             </div>
             <div class="col form-group">
-                    <label for="text-0">Total Amount</label>
+                    <label for="text-0">Total Amount<span style="color:red">*</span></label>
                    <input type="text" name="total[]" id="text-${index}" class="form-control total" disabled>
              </div>
             <div class="col-auto form-group">
@@ -1042,7 +1086,18 @@
 
         }
         , messages: {
-
+            "labour_type[]":{
+                required:"Please Select Labour Type"
+            },
+            "no_of_worker[]":{
+                required:"Enter No. Of Labour"
+            },
+            "work_days[]":{
+                required:"Enter No. Of Working Days"
+            },
+            "cost_days[]":{
+                required:"Enter Amount"
+            },
         }
         , submitHandler: function(form, message) {
             redUrl = base_url + '/add-project-plan-labour';
@@ -1213,7 +1268,7 @@
         let newRow2 = `
         <div class="form-row mb-3 dynamic-row2">
             <div class="col form-group">
-                <label for="material_type-${index}">Material Type</label>
+                <label for="material_type-${index}">Material Type<span style="color:red">*</span></label>
                 <select class="form-control select2 material_type" id="material_type-${index}" name="material_type[]">
                     <option value="">Select an option</option>
                     `
@@ -1225,18 +1280,18 @@
                 </select>
             </div>
             <div class="col form-group">
-                <label for="material-${index}">Material</label>
+                <label for="material-${index}">Material<span style="color:red">*</span></label>
                 <select class="form-control select2 select2-dependent" id="material-${index}" name="material[]" disabled>
                     <option value="">Select an option</option>
                 </select>
             </div>
             <div class="col form-group">
-                <label for="quantity-${index}">Quantity</label>
+                <label for="quantity-${index}">Quantity<span style="color:red">*</span></label>
                 <input type="number" min="0" class="form-control" id="quantity-${index}" name="quantity[]" required>
             </div>
             <div class="col form-group">
 
-                                    <label for="rate-${index}">Rate/unit</label>
+                                    <label for="rate-${index}">Rate/unit<span style="color:red">*</span></label>
                                     <input type="number" min="0" class="form-control" id="rate-${index}" name="rate[]"  required>
                                 </div>
             <div class="col-auto form-group">
@@ -1319,6 +1374,18 @@
         }
         , messages: {
 
+            "material_type[]":{
+                required:"Please Select Material Type"
+            },
+            "material[]":{
+                required:"Please Select Material"
+            },
+            "quantity[]":{
+                required:"Enter Quantity"
+            },
+            "rate[]":{
+                required:"Enter Amount"
+            },
         }
         , submitHandler: function(form, message) {
             redUrl = base_url + '/add-project-plan-material';
@@ -1615,6 +1682,15 @@
             }
         }
         , messages: {
+            "machine_type[]": {
+                required: "Please Select Machine Type"
+            }
+            , "machine[]": {
+                required: "Please Select Machine"
+            }
+            , "quantity[]": {
+                required: "Please Enter Machine Quantity"
+            }
         }
         , submitHandler: function(form, message) {
             redUrl = base_url + '/add-project-plan-machine';
@@ -1742,7 +1818,7 @@
         let newRow8 = `
         <div class="form-row mb-3 align-items-end dynamic-row8">
             <div class="col form-group">
-                <label for="select-${index}">Vehicle Types</label>
+                <label for="select-${index}">Vehicle Types<span style="color:red">*</span></label>
                 <select name="vehicle_type[]" id="vehicle_type-${index}" class="form-control select2 vehicle_type" style="width: 200px;" required>
                     <option value="">Choose...</option>
                     `
@@ -1754,15 +1830,15 @@
                 </select>
             </div>
             <div class="col form-group">
-                <label for="vehical_quantity-${index}">Quantity</label>
+                <label for="vehical_quantity-${index}">Quantity<span style="color:red">*</span></label>
                 <input type="number" name="vehical_quantity[]" id="vehical_quantity-${index}" class="form-control vehical_quantity">
             </div>
             <div class="col form-group">
-                <label for="time_hours-${index}">Estimated Time(hours)</label>
+                <label for="time_hours-${index}">Estimated Time(hours)<span style="color:red">*</span></label>
                 <input type="number" name="time_hours[]" id="time_hours-${index}" class="form-control time_hours">
             </div>
             <div class="col form-group">
-                <label for="cost_per_hour-${index}">Cost/Hour</label>
+                <label for="cost_per_hour-${index}">Cost/Hour<span style="color:red">*</span></label>
                 <input type="number" name="cost_per_hour[]" id="cost_per_hour-${index}" class="form-control cost_per_hour">
             </div>
             <div class="col form-group">
@@ -1875,7 +1951,18 @@
 
         }
         , messages: {
-
+            "vehicle_type[]":{
+                required:"Please Select Vehicle Type"
+            },
+            "vehical_quantity[]":{
+                required:"Enter Quantity"
+            },
+            "time_hours[]":{
+                required:"Enter Time Required In Hours"
+            },
+            "cost_per_hour[]":{
+                required:"Enter Amount"
+            },
         }
         , submitHandler: function(form, message) {
             redUrl = base_url + '/add-project-plan-vehicle-type';
@@ -2177,6 +2264,12 @@
             }
         }
         , messages: {
+            "department[]": {
+                required: "Please Select Department"
+            }
+            , "user[]": {
+                required: "Please Select User"
+            }
         }
         , submitHandler: function(form, message) {
             redUrl = base_url + '/add-project-plan-department';
