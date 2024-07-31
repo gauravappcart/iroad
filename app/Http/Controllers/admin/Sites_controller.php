@@ -225,7 +225,7 @@ class Sites_controller extends Controller
             ->orderBy('road_components_chainage.from_length')
             ->get()->toArray();
         // dd($result['activity_tender_list'] );
-        $result['labour'] = Labour::all();
+        $result['labour'] = Labour::where('is_active',1)->get();
 
         $result['site_plan_labour'] = SitePlanLabour::where('site_plan_labours.site_id', base64_decode($result['site_id']))
             ->select('site_plan_labours.*')
@@ -268,8 +268,9 @@ class Sites_controller extends Controller
         $result['site_plan_departments'] = SitePlanDepartment::where('site_plan_departments.site_id', base64_decode($result['site_id']))
             ->select('site_plan_departments.*')
             ->get();
-        $result['departments'] = Roles_model::all();
-        $result['users'] = Users_model::all();
+            // dd($result['site_plan_departments']->toArray());
+        $result['departments'] = Roles_model::where('is_active',1)->get();
+        $result['users'] = Users_model::where('is_active',1)->get();
 
 
 
@@ -611,13 +612,13 @@ class Sites_controller extends Controller
     }
     public function get_user_options(Request $request, $department_id)
     {
-        // dd($request->selectedOptions);
+        // dd($request->department_id);
         if ($request->selectedOptions) {
 
             $options = Users_model::leftjoin('roles', 'roles.role_id', 'users.user_role')->where('users.user_role', $department_id)->whereNotIn('users.user_id', $request->selectedOptions)->select('users.*', 'roles.role_name')->get();
         } else {
 
-            $options = Users_model::leftjoin('roles', 'roles.role_id', 'users.user_role')->where('users.user_role', $department_id)->select('users.*', 'roles.role_name')->get();
+            $options = Users_model::leftjoin('roles', 'roles.role_id', 'users.user_role')->where('users.user_role', $department_id)->select('users.*', 'roles.role_name')->get()->toArray();
         }
         // dd($options);
         return response()->json($options);

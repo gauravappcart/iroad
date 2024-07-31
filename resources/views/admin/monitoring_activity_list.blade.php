@@ -450,7 +450,10 @@
             'monitored_tender_item':{
                 required:true
             }
-
+            ,
+            monitor_item:{
+                required:true
+            }
 
         }
         , messages: {
@@ -467,6 +470,9 @@
                 required: "Please Select Option"
             },
             'monitored_tender_item':{
+                required: "Please Select Monitored Tender Item"
+            },
+            monitor_item:{
                 required: "Please Select Monitored Tender Item"
             }
         }

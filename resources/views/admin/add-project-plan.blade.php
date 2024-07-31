@@ -669,6 +669,11 @@
                                 <option value="">Choose...</option>
                                 @foreach ($users as $row)
                                 <option value="{{$row->user_id}}" {{$data->user_id==$row->user_id?'selected':''}}>{{$row->first_name}} {{$row->last_name}}</option>
+                                {{-- <option value="{{$row->user_id}}" {{$data->user_id==$row->user_id?'selected':''}}>{{$row->user_id}} {{$data->user_id}}</option> --}}
+                               {{-- @if($row->user_id==$data->user_id)
+                                <h3>{{$row->user_id}} {{$data->user_id}}</h3>
+                                @endif --}}
+
                                 @endforeach
                             </select>
                         </div>
@@ -2063,11 +2068,18 @@
     // Function to handle dependent dropdowns
     // function handleDependentdepartmentDropdowns(department_type, department,department_cost_pr_hrs) {
     function handleDependentdepartmentDropdowns(department,user) {
+        // alert('called ')
+        var Selecteduser=[];
+// alert(department)
+// console.log(department);
+// console.log("-------------------------------");
+// console.log(user)
+// alert(user)
 
-        let Selecteduser=[];
         $('select[name="user[]"]').each(function() {
                     // Get the selected values using the val() method
                   var selectedValues = $(this).val();
+
                     // Push the selected values to the array
                     if(selectedValues){
                         Selecteduser.push(selectedValues);
@@ -2075,10 +2087,10 @@
                 });
                 Selecteduser = jQuery.unique( Selecteduser );
                 console.log('selected Values -> '+ Selecteduser)
+
                 department.on('change', function() {
             const value = $(this).val();
-            // alert(value)
-            user.empty().append('<option value="">Select an option</option>');
+
             if (value) {
                 $.ajax({
                     url: base_url + `/get-user-options/${value}`
@@ -2091,8 +2103,9 @@
                         'X-CSRF-TOKEN': csrfToken
                     }
                     , success: function(data) {
-                        console.log(department);
+                        console.log('Selected DEpartment ->',department);
                     // alert(department)
+                    user.empty().append('<option value="">Select an option</option>');
                         user.prop('disabled', false);
                         data.forEach(option => {
                             // department_cost_pr_hrs
@@ -2127,12 +2140,11 @@
     // handleDependentdepartmentDropdowns($('#department_type-0'), $('#department-0'),$('#department_cost_pr_hrs-0'));
     handleDependentdepartmentDropdowns($('#department-0'), $('#user-0'));
     var departments = JSON.parse('<?php echo json_encode($departments) ?>');
-    console.log(departments);
+    console.log("Depatments--->",departments);
     // Function to add a new row
 
     let indexdepartment='';
     function adddepartmentRow() {
-
         // return false;
         indexdepartment = $('.dynamic-row4').length;
         if($(`#user-${indexdepartment-1}`).val()){

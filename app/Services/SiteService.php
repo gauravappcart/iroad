@@ -65,7 +65,8 @@ class SiteService
         // ->where('chainage_id',base64_decode($request->chainage_id))->get();
         ->where('component_id', $result['component_id'])->get();
         // dd($request->tender_items);
-        $result['units']=Units::all();
+        // $result['units']=Units::all();
+        $result['units']=Units::where('unit_for', 1)->where('is_active',1)->get();
         $result['selectedUnitId']='';
         return $result;
 

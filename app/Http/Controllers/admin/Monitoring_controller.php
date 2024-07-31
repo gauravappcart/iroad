@@ -32,8 +32,8 @@ class Monitoring_controller extends Controller
     public function add_activity(Request $request)
     {
         if (empty($request['activity_id'])) {
+            $exist_activities = Activity_model::select('*')->whereIn('activity_name', $request['activity_name'])->get()->toArray();
             if (empty($exist_activities)) {
-                $exist_activities = Activity_model::select('*')->whereIn('activity_name', $request['activity_name'])->get()->toArray();
 
                 foreach ($request['activity_name'] as $key => $act) {
 
@@ -125,7 +125,7 @@ class Monitoring_controller extends Controller
             ->select('monitoring_activities.activity_name', 'monitoring_activities.activity_description', 'units.unit_name', 'monitor_tenders.*')
             ->get();
         // dd($result['activity_tender_list']);
-        $result['monitoer_units'] = Units::where('unit_for', 2)->get();
+        $result['monitoer_units'] = Units::where('unit_for', 2)->where('is_active',1)->get();
 
         // dd( $result['activity_list']);
         // $result['units']=Units::all();

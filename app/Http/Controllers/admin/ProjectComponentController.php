@@ -8,6 +8,7 @@ use App\Models\Component_monitering_activity_mapping_model;
 use App\Models\Road_components_model;
 use App\Models\ComponentExtraField;
 use App\Models\Units;
+use App\Models\ComponentChainageModel;
 use Illuminate\Http\Request;
 use App\Services\SiteService;
 use Illuminate\Support\Facades\DB;
@@ -131,9 +132,16 @@ class ProjectComponentController extends Controller
         } else {
 
             if (!empty($request['delete'])) {
-                $deleted_data = Road_components_model::find($request['component_id'])->delete();
-                $deleted_data = Component_monitering_activity_mapping_model::where('component_id', $request['component_id'])->update(['deleted_at' => Carbon::now()->format('Y-m-d H:i:s')]);
-                $result = array('status' => true, 'msg' => 'Component deleted successfully');
+
+                $Check_component_used=ComponentChainageModel::where('component_id',$request['component_id'])->Where('deleted_at',Null)->get();
+                if(count($Check_component_used)>=1){
+                    $result = array('status' => true, 'msg' => 'Component can not deleted as its already used.');
+                }else{
+                    $deleted_data = Road_components_model::find($request['component_id'])->delete();
+                    $deleted_data = Component_monitering_activity_mapping_model::where('component_id', $request['component_id'])->update(['deleted_at' => Carbon::now()->format('Y-m-d H:i:s')]);
+                    $result = array('status' => true, 'msg' => 'Component deleted successfully');
+                }
+
             } else {
 
                 $material_update = Road_components_model::where('component_id', $request['component_id'])->update($componentData);

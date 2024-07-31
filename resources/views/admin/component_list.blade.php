@@ -558,8 +558,9 @@
 
                     if (res.status) {
 
-                        $(".material-err").css("color", "#28a745");
-                        $(".material-err").html(res.msg);
+                        // $(".material-err").css("color", "#28a745");
+                        // $(".material-err").html(res.msg);
+                        alert(res.msg)
                         setTimeout(function() {
                             location.reload();
                         }, 2000);
@@ -567,9 +568,9 @@
 
                     } else {
                         // fp1.close();
-                        $(".material-err").css("color", "red");
-                        $(".material-err").html(res.msg);
-
+                        // $(".material-err").css("color", "red");
+                        // $(".material-err").html(res.msg);
+                        alert(res.msg)
                         setTimeout(function() {
                             // location.reload();
                         }, 3000);

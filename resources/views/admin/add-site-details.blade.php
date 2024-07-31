@@ -1426,6 +1426,24 @@ if (targetClass) {
             }
         });
     }
+
+    $('#showEditModal').on('hidden.bs.modal', function(e) {
+        document.getElementById("update_component").reset();
+        $(this)
+            .find("textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end()
+            .find("img")
+            .prop("src", "")
+            .end();
+
+        var $add_tender_item = $('#update_component');
+        $add_tender_item.validate().resetForm();
+        $add_tender_item.find('.error').removeClass('error');
+    })
     </script>
 
 </body>

@@ -118,6 +118,7 @@ class MaterialImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'material_unit' => $unitData->unit_id,
             'site_id' => $site_id,
             'material_name' => $row['material_name'],
+            'material_cost' => $row['material_cost'],
             'created_by'=>session()->get('user_id'),
             'is_active' => 1
         ]);
@@ -145,6 +146,7 @@ class MaterialImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             $rules["material_type"] = ['required', 'exists:material_types,material_type'];
             $rules["material_unit"] = ['required', 'exists:units,unit_name'];
             $rules["site_id"] = ['required', 'exists:sites,site_name'];
+            $rules["material_cost"] = ['required', 'numeric', 'gt:0'];
         }
 
         return $rules;
@@ -161,6 +163,9 @@ class MaterialImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'material_unit.exists' => 'Material unit must exist in the units table.',
             'site_id.required' => 'Site name is required.',
             'site_id.exists' => 'Site name must exist in the sites table.',
+            'material_cost.required' => 'The material cost is required.',
+            'material_cost.numeric' => 'The material cost must be a number.',
+            'material_cost.gt' => 'The material cost must be greater than zero.'
         ];
     }
 

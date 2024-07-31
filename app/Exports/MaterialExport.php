@@ -24,7 +24,8 @@ class MaterialExport implements FromCollection, WithHeadings, WithEvents
             'material_type', // Column 1 with dropdown
             'material_unit',
             'material_name',
-            'site_id'
+            'site_id',
+            'material_cost',
             // Add other column headings as necessary
         ];
     }

@@ -61,7 +61,7 @@
                         <div class="site-points">
                             <div class="project-content">
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                         <h4><a aria-label="Click to go dashboard" class="hint--top" href="{{ $prefix }}/add-project-details?site_id={{ base64_encode($val['site_id'])  }}">{{ $val['site_name'] }}</a></h4>
                                     </div>
 
@@ -169,7 +169,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="no_of_junction" class=" form-control-label">JUNCTIONS<span style="color:red">*</span></label>
-                                            <input type="number" id="no_of_junction" name="no_of_junction" placeholder="No Of Junction" class="form-control">
+                                            <input type="number" min=0 id="no_of_junction" name="no_of_junction" placeholder="No Of Junction" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">

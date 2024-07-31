@@ -18,6 +18,7 @@ use App\Http\Controllers\admin\RolesController;
 use App\Http\Controllers\admin\DesignationsController;
 use App\Http\Controllers\admin\Machine_controller;
 use App\Http\Controllers\admin\Assets_controller;
+use App\Http\Controllers\admin\ConflictsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +113,10 @@ function invalid()
 
     Route::get('vendors', [Vendor_controller::class, 'index'])->name('vendors');
     Route::post('add-vendors', [Vendor_controller::class, 'add_vendors']);
+
+    Route::get('conflicts', [ConflictsController::class, 'index']);
+    Route::get('get-conflicts-details', [ConflictsController::class, 'get_conflicts_details']);
+    Route::POST('save-conflicts-information', [ConflictsController::class, 'save_conflicts_information']);
 
     Route::get('sites', [Sites_controller::class, 'index']);
     Route::post('add-site', [Sites_controller::class, 'add_site']);
