@@ -848,7 +848,11 @@
 
             var minValue = document.getElementById('min_range').value;
             var maxValue = document.getElementById('max_range').value;
-            window.location = appurl + "/admin/add-weekly-plan?site_id=" + site_id + "&chainage_id=" + chainage_id + "&minValue=" + minValue + "&maxValue=" + maxValue +""
+            // window.location = appurl + "/admin/add-weekly-plan?site_id=" + site_id + "&chainage_id=" + chainage_id + "&minValue=" + minValue + "&maxValue=" + maxValue +""
+
+            // above code is working below new code
+            var prefix = @json($profile_data['prefix']);
+            window.location = prefix + "/add-weekly-plan?site_id=" + site_id + "&chainage_id=" + chainage_id + "&minValue=" + minValue + "&maxValue=" + maxValue +""
         });
 
         $('input[name="options"]').change(function() {

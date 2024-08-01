@@ -67,11 +67,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $value['sites']['site_name'] }}</td>
-                                    <td>{{ $value['subject'] }}</td>
+                                    <td>{{ $value['subject']?$value['subject']:$value['other_reason_title'] }}</td>
                                     <td>{{$value['conflict_description'] }}</td>
                                     <td>{{ date('Y-m-d',strtotime($value['created_at'])) }}</td>
                                     <td>{{ date('Y-m-d',strtotime($value['updated_at'])) }}</td>
-                                    <td class="text-center">{{ $value['is_active']==1 ? 'Resolved' : 'Unresolved' }}</i></td>
+                                    <td class="text-center">{{ $value['confirmed']==1 ? 'Resolved' : 'Unresolved' }}</i></td>
                                     {{-- <td class="text-center"><i class="fa fa-circle fa-1" style="font-size :20px; color:{{ $value['deleted_at']==NULL ? '#44b749' : '#dc3545'}}" aria-hidden="true"></i></td> --}}
 
 

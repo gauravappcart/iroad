@@ -33,6 +33,6 @@ class Conflicts extends Model
     }
     public function conflicts_resolved_information()
     {
-        return $this->belongsTo(ConflictsResolvedInformation::class,'conflict_id','conflict_id');
+        return $this->hasMany(ConflictsResolvedInformation::class,'conflict_id','conflict_id');
     }
 }

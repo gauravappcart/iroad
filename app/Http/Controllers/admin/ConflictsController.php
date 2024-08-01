@@ -30,7 +30,7 @@ class ConflictsController extends Controller
             $result['record'] = Conflicts::findOrFail($request->id);
             if($result['record']){
                 $result['conflicts_details']= Conflicts::with(['conflicts_media','conflicts_resolved_information','sites','companies'])->where('conflict_id',$request->id)->get()->toArray();
-                dd($result['conflicts_details']);
+                // dd($result['conflicts_details']);
                 return view('admin/conflict_details', $result);
             }else{
                 return back()->withErrors(['msg' => 'Record not found']);
@@ -57,7 +57,7 @@ class ConflictsController extends Controller
                 'confirmed_date'=>now(),
             ]);
 
-            ConflictsResolvedInformation::create(
+           $data= ConflictsResolvedInformation::create(
                 [
                     'conflict_id'=>$request->conflict_id,
                     'resolved_comment'=>$request->resolved_comment,
@@ -65,9 +65,15 @@ class ConflictsController extends Controller
                     'updated_by'=>session()->get('user_id'),
                 ]
             );
-            $result = array('status' => true, 'msg' => 'Comment Updated Successfully And Conflict Resolved Is Marked.');
+            if($data){
+
+                $result = array('status' => true, 'msg' => 'Comment Updated Successfully And Conflict Resolved Is Also Marked.');
+            }
+            else{
+                $result = array('status' => false, 'msg' => 'Something Went Wrong');
+            }
         }else{
-            ConflictsResolvedInformation::create(
+            $data=ConflictsResolvedInformation::create(
                 [
                     'conflict_id'=>$request->conflict_id,
                     'resolved_comment'=>$request->resolved_comment,
@@ -75,8 +81,15 @@ class ConflictsController extends Controller
                     'updated_by'=>session()->get('user_id'),
                 ]
             );
+
+            if($data){
+
+                $result = array('status' => true, 'msg' => 'Comment Updated Successfully');
+            }else{
+                $result = array('status' => false, 'msg' => 'Something Went Wrong');
+            }
         }
-        dd($request->all());
+        echo json_encode($result);
     }
 
     /**
