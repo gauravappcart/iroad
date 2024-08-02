@@ -7,6 +7,7 @@ use App\Models\Conflicts;
 use App\Models\ConflictsResolvedInformation;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Intervention\Image\Facades\Image as InterventionImage;
 
 class ConflictsController extends Controller
 {
@@ -18,21 +19,22 @@ class ConflictsController extends Controller
     public function index()
     {
         // dd('ConflictsController Index');
-        $result['conflicts']=Conflicts::with('sites')->with('companies')->where('company_id',session()->get('company_id'))->orderBy('created_at','desc')->get()->toArray();
+        $result['conflicts'] = Conflicts::with('sites')->with('companies')->where('company_id', session()->get('company_id'))->orderBy('created_at', 'desc')->get()->toArray();
         // dd($result);
-        return view('admin/conflict_list',$result);
+        return view('admin/conflict_list', $result);
     }
 
-    public function get_conflicts_details(Request $request){
+    public function get_conflicts_details(Request $request)
+    {
 
 
         try {
             $result['record'] = Conflicts::findOrFail($request->id);
-            if($result['record']){
-                $result['conflicts_details']= Conflicts::with(['conflicts_media','conflicts_resolved_information','sites','companies'])->where('conflict_id',$request->id)->get()->toArray();
+            if ($result['record']) {
+                $result['conflicts_details'] = Conflicts::with(['conflicts_media', 'conflicts_resolved_information', 'sites', 'companies'])->where('conflict_id', $request->id)->get()->toArray();
                 // dd($result['conflicts_details']);
                 return view('admin/conflict_details', $result);
-            }else{
+            } else {
                 return back()->withErrors(['msg' => 'Record not found']);
             }
         } catch (ModelNotFoundException $e) {
@@ -49,43 +51,43 @@ class ConflictsController extends Controller
     }
 
 
-    public function save_conflicts_information(Request $request){
-        if($request->resolved==1){
-            $material_update=Conflicts::where('conflict_id', $request['conflict_id'])->update([
-                'confirmed_by'=>session()->get('user_id'),
-                'confirmed'=>$request->resolved?1:0,
-                'confirmed_date'=>now(),
+    public function save_conflicts_information(Request $request)
+    {
+        if ($request->resolved == 1) {
+            $material_update = Conflicts::where('conflict_id', $request['conflict_id'])->update([
+                'confirmed_by' => session()->get('user_id'),
+                'confirmed' => $request->resolved ? 1 : 0,
+                'confirmed_date' => now(),
             ]);
 
-           $data= ConflictsResolvedInformation::create(
+            $data = ConflictsResolvedInformation::create(
                 [
-                    'conflict_id'=>$request->conflict_id,
-                    'resolved_comment'=>$request->resolved_comment,
-                    'created_by'=>session()->get('user_id'),
-                    'updated_by'=>session()->get('user_id'),
+                    'conflict_id' => $request->conflict_id,
+                    'resolved_comment' => $request->resolved_comment,
+                    'created_by' => session()->get('user_id'),
+                    'updated_by' => session()->get('user_id'),
                 ]
             );
-            if($data){
+            if ($data) {
 
                 $result = array('status' => true, 'msg' => 'Comment Updated Successfully And Conflict Resolved Is Also Marked.');
-            }
-            else{
+            } else {
                 $result = array('status' => false, 'msg' => 'Something Went Wrong');
             }
-        }else{
-            $data=ConflictsResolvedInformation::create(
+        } else {
+            $data = ConflictsResolvedInformation::create(
                 [
-                    'conflict_id'=>$request->conflict_id,
-                    'resolved_comment'=>$request->resolved_comment,
-                    'created_by'=>session()->get('user_id'),
-                    'updated_by'=>session()->get('user_id'),
+                    'conflict_id' => $request->conflict_id,
+                    'resolved_comment' => $request->resolved_comment,
+                    'created_by' => session()->get('user_id'),
+                    'updated_by' => session()->get('user_id'),
                 ]
             );
 
-            if($data){
+            if ($data) {
 
                 $result = array('status' => true, 'msg' => 'Comment Updated Successfully');
-            }else{
+            } else {
                 $result = array('status' => false, 'msg' => 'Something Went Wrong');
             }
         }
@@ -156,5 +158,31 @@ class ConflictsController extends Controller
     public function destroy(Conflicts $conflicts)
     {
         //
+    }
+
+
+    public function conflicts_image_store(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle file upload
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $imagePath = $file->store('images', 'public'); // Store image in 'storage/app/public/images'
+
+            // Create thumbnail
+            $thumbnailPath = 'thumbnails/' . basename($imagePath);
+            $thumbnailImage = InterventionImage::make($file)->resize(150, 150)->save(storage_path('app/public/' . $thumbnailPath));
+
+            // Save paths to database
+            Image::create([
+                'image_path' => $imagePath,
+                'thumbnail_path' => $thumbnailPath,
+            ]);
+        }
+
+        return back()->with('success', 'Image uploaded successfully.');
     }
 }

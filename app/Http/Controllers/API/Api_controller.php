@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class Api_controller extends Controller
 {
     //
     public function index()
-    {       
+    {
         // $pdf = PDF::loadView('admin/demo_mailer', $result);
         // $pdf->set_paper("a4", "portrait");
         // $output = $pdf->output();
@@ -31,5 +31,5 @@ class Api_controller extends Controller
 
     }
 
-   
+
 }

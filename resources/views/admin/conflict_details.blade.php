@@ -4,6 +4,46 @@
 <link rel="stylesheet" href="{{asset('assets/css/select2.min.css')}}" />
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+<style>
+        /* Style for the popup */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+    z-index: 1000; /* Sit on top */
+}
+
+/* Popup content */
+.popup-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Image in the popup */
+#popup-image {
+    max-width: 100%;
+    height: auto;
+}
+</style>
 <?php $prefix= $profile_data['prefix'];?>
 
 <div class="content">
@@ -88,8 +128,40 @@
 
                                 </div>
                             </div>
+
+
+                            {{-- Assuming $imagePath contains the relative path to the image --}}
+                            @if (!empty($conflicts_details[0]['conflicts_media']))
+                                {{-- @if ($conflicts_details[0]['conflicts_media']['filepath'])
+
+                                <img id="zoom-image" src="{{ asset('storage/app/public/' . $conflicts_details[0]['conflicts_media']['filepath']) }}" alt="Image" height="100" width="100" />
+                                @else
+
+                                <img src="{{ asset('storage/app/public/no-img.jpg') }}" alt="No Image" height="100" width="100"/>
+                                @endif --}}
+
+
+                                <div class="image-zoom-container">
+                                    @if (!empty($conflicts_details[0]['conflicts_media']))
+                                        <img id="thumbnail" src="{{ asset('storage/app/public/' . $conflicts_details[0]['conflicts_media']['filepath']) }}" title="Click To Zoom" alt="Image" height="100" width="100" />
+                                        <div id="popup" class="popup">
+                                            <div class="popup-content">
+                                                <span class="close-btn" id="close-btn">&times;</span>
+                                                <img id="popup-image" src="" alt="Popup Image">
+                                            </div>
+                                        </div>
+                                    @else
+                                        <img src="{{ asset('storage/app/public/no-img.jpg') }}" alt="No Image" />
+                                    @endif
+                                </div>
+                            @else
+
+                                <img src="{{ asset('storage/app/public/images/no_img.jpg') }}" alt="No Image" height="100" width="100"/>
+                            @endif
+
+
                             @if($conflicts_details[0]['confirmed']==0)
-                            <div class="">
+                            <div class="m-3">
                                 <button type="submit" class="btn btn-primary"><span id="btn_title">Submit</span></button>
                             </div>
                             @endif
@@ -155,6 +227,32 @@
 <script src="{{asset('assets/js/jquery.validate.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/additional-methods.min.js" integrity="sha512-TiQST7x/0aMjgVTcep29gi+q5Lk5gVTUPE9XgN0g96rwtjEjLpod4mlBRKWHeBcvGBAEvJBmfDqh2hfMMmg+5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('assets/js/common.js')}}"></script>
+<script> document.addEventListener('DOMContentLoaded', function() {
+    // Get the elements
+    const thumbnail = document.getElementById('thumbnail');
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('close-btn');
+    const popupImage = document.getElementById('popup-image');
+
+    // Open the popup with the image
+    thumbnail.addEventListener('click', function() {
+        popupImage.src = this.src; // Set the popup image src to the clicked image src
+        popup.style.display = 'block'; // Show the popup
+    });
+
+    // Close the popup when the close button is clicked
+    closeBtn.addEventListener('click', function() {
+        popup.style.display = 'none'; // Hide the popup
+    });
+
+    // Close the popup if clicked outside the content
+    window.addEventListener('click', function(event) {
+        if (event.target === popup) {
+            popup.style.display = 'none'; // Hide the popup
+        }
+    });
+});
+</script>
 
 <script>
       var csrfToken = $('input[name="_token"]').attr('value');
@@ -203,7 +301,6 @@
                 cache: false, // To unable request pages to be cached
                 processData: false, // To send DOMDocument or non processed data file it is set to false
                 success: function(res) {
-
                     if (res.status) {
                         $(".material-err").css("color", "green");
                         $(".material-err").html(res.msg);

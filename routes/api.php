@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\Api_controller;
-use App\Http\Controllers\admin\ApiAuthController;
+use App\Http\Controllers\API\Api_controller;
+use App\Http\Controllers\API\ApiAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +27,5 @@ Route::middleware(['apiLogin'])->group(function () {
 Route::post('sites', [ApiAuthController::class, 'sitesList']);
 Route::post('logout', [ApiAuthController::class, 'logout']);
 Route::post('projects-save', [ApiAuthController::class, 'projects_details_save']);
-
+Route::post('saveConflicts-image', [ApiAuthController::class, 'saveConflicts']);
 });

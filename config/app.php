@@ -179,8 +179,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FacadesServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         // 'Intervention\Image\ImageServiceProvider',
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -199,6 +200,7 @@ return [
         // 'Image' => 'Intervention\Image\Facades\Image',
         'UserFacades' => App\GlobalFacades\Facades::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class,
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
