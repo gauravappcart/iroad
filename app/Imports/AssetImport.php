@@ -34,7 +34,7 @@ class AssetImport implements ToCollection,WithHeadingRow
     //     ]);
     // }
 
-
+    protected $requiredColumns = ['asset_sub_group', 'asset_name'];
     public function collection(Collection $rows)
     {
         // echo "<pre>";
@@ -48,6 +48,13 @@ class AssetImport implements ToCollection,WithHeadingRow
         // echo date('Y-m-d',strtotime($rows[0]['invoice_date']));
         // exit;
 
+        $headerRow = $rows->first(); // Assuming the first row is the header
+        $missingColumns = array_diff($this->requiredColumns, array_keys($headerRow->toArray()));
+
+        if (!empty($missingColumns)) {
+            $message = 'Missing columns: ' . implode(', ', $missingColumns);
+            throw new \Exception($message); // Throw a generic exception
+        }
         foreach($rows as $key=>$row)
         {
             // echo "<pre>";

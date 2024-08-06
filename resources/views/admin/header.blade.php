@@ -117,7 +117,7 @@
                     <li class="user-nav"> <a href="{{ $prefix }}/sites"><i class="menu-icon fa fa-book"></i>Project Details </a> </li>
                     <li class="user-nav"> <a href="{{ $prefix }}/sites"><i class="menu-icon fa fa-money"></i>Finance </a> </li>
                     <li class="user-nav"> <a href="{{ $prefix }}/conflicts"><i class="menu-icon fa fa-question-circle"></i>Conflicts </a> </li>
-                    <li class="user-nav"> <a href="{{ $prefix }}/sites"><i class="menu-icon fa fa-file-text"></i>Requests </a> </li>
+                    <li class="user-nav"> <a href="{{ $prefix }}/requests"><i class="menu-icon fa fa-file-text"></i>Requests </a> </li>
                     <li class="user-nav"> <a href="{{ $prefix }}/sites"><i class="menu-icon fa fa-refresh"></i>Project Updates </a> </li>
                     <li class="user-nav"> <a href="{{ $prefix }}/sites"><i class="menu-icon fa fa-bar-chart-o"></i>Reports</a> </li>
 

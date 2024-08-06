@@ -75,7 +75,7 @@ class Assets_controller extends Controller
          return response()->json($assetResposne);
     }
 
-    public function import_asset(Request $request)
+    public function import_asset_old(Request $request)
     {
          $request=$request->all();
          if(request()->file('import_asset')->extension()=='xlsx')
@@ -86,6 +86,23 @@ class Assets_controller extends Controller
                return Redirect::back()->withErrors(['msg' => 'Only .xlsx extension allowed.']);
          }
     }
+    public function import_asset(Request $request)
+{
+    // Validate the file extension
+    if ($request->file('import_asset')->extension() == 'xlsx') {
+        try {
+            // Perform the import
+            Excel::import(new AssetImport, $request->file('import_asset'));
+            return Redirect::back()->with(['msg' => 'File imported successfully.']);
+        } catch (\Exception $e) {
+            // Handle the custom exception for missing columns
+            // return Redirect::back()->withErrors(['msg' => 'Wrong File Imported: ' . $e->getMessage()]);
+            return Redirect::back()->withErrors(['msg' => 'Wrong File Imported,Please Download File Before Importing ']);
+        }
+    } else {
+        return Redirect::back()->withErrors(['msg' => 'Only .xlsx extension allowed.']);
+    }
+}
     public function edit_asset(Request $request)
      {
           $request=$request->all();

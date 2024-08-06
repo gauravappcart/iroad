@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\DesignationsController;
 use App\Http\Controllers\admin\Machine_controller;
 use App\Http\Controllers\admin\Assets_controller;
 use App\Http\Controllers\admin\ConflictsController;
+use App\Http\Controllers\admin\AssetMaterialLabourRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +118,9 @@ function invalid()
     Route::get('conflicts', [ConflictsController::class, 'index']);
     Route::get('get-conflicts-details', [ConflictsController::class, 'get_conflicts_details']);
     Route::POST('save-conflicts-information', [ConflictsController::class, 'save_conflicts_information']);
+
+    //Material Asset Labour Request
+    Route::get('requests', [AssetMaterialLabourRequestController::class, 'index']);
 
     Route::get('sites', [Sites_controller::class, 'index']);
     Route::post('add-site', [Sites_controller::class, 'add_site']);
