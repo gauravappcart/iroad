@@ -14,17 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('material_requests', function (Blueprint $table) {
-            $table->id();
-            $table->float(`request_quantity`);
+            $table->bigIncrements('material_request_id');
+            $table->float('request_quantity');
             $table->string('material_type_id')->nullable();
             $table->string('material_id')->nullable();
             $table->tinyInteger('request_status')->default(0)->comment('0:Pending|1:Approved');;
-            $table->float('qty_approved');
-            $table->string('approved_by');
-            $table->date('approved_date');
-            $table->float('qty_received');
+            $table->float('qty_approved')->nullable();
+            $table->string('approved_by')->nullable();
+            $table->date('approved_date')->nullable();
+            $table->float('qty_received')->nullable();
             $table->string('received_by',100)->nullable();
-            $table->date('received_date');
+            $table->date('received_date')->nullable();
             $table->string('site_id')->nullable();
             $table->string('component_id')->nullable();
             $table->tinyInteger('received_status')->default(0)->comment('0:Not Received|1:Received');

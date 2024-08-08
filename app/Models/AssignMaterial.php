@@ -6,22 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Labour extends Model
+class AssignMaterial extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory ,SoftDeletes;
 
     public $timestamps = true;  // will not take default column created_at and updated_at
 
-    protected $table = 'labours';
+    protected $table = 'assign_materials';
 
-    protected $primaryKey = 'labour_id';   //make default primary key
+    protected $primaryKey = 'assign_material_id';   //make default primary key
 
     protected $guarded = []; //allow  fill all data in table
 
-
-    public function labourRequests()
-    {
-        return $this->hasMany(LabourRequest::class, 'labour_id', 'labour_id');
-    }
 }

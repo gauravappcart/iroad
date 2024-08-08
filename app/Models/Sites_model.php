@@ -41,4 +41,13 @@ class Sites_model extends Model
         return $this->hasMany(ComponentChainageModel::class, 'site_id')->leftJoin('road_components','road_components.component_id','road_components_chainage.component_id')->select('road_components_chainage.*','road_components.component_name','road_components.component_icon_file','road_components.dimentionstype')->orderBy('road_components_chainage.created_at');
 
     }
+
+    public function material_Requests()
+    {
+        return $this->hasMany(MaterialRequest::class, 'site_id', 'site_id');
+    }
+    public function labour_Requests()
+    {
+        return $this->hasMany(LabourRequest::class, 'site_id', 'site_id');
+    }
 }

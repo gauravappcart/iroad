@@ -121,6 +121,7 @@ function invalid()
 
     //Material Asset Labour Request
     Route::get('requests', [AssetMaterialLabourRequestController::class, 'index']);
+    Route::post('assign-required-material', [AssetMaterialLabourRequestController::class, 'assign_required_material']);
 
     Route::get('sites', [Sites_controller::class, 'index']);
     Route::post('add-site', [Sites_controller::class, 'add_site']);

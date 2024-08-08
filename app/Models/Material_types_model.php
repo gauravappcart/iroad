@@ -18,10 +18,15 @@ class Material_types_model extends Model
 
     protected $primaryKey = 'mtype_id';   //make default primary key
 
-    protected $guarded = []; //allow  fill all data in table  
+    protected $guarded = []; //allow  fill all data in table
 
     public function materials()
     {
         return $this->hasMany(Material_model::class,'material_type');
+    }
+
+    public function materialRequests()
+    {
+        return $this->hasMany(MaterialRequest::class, 'material_type_id', 'mtype_id');
     }
 }
