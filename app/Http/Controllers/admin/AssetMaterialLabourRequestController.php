@@ -7,6 +7,7 @@ use App\Models\AssetRequest;
 use App\Models\LabourRequest;
 use App\Models\MaterialRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\AssignRequiredMaterialRequest;
 use App\Services\RequestService;
 
 class AssetMaterialLabourRequestController extends Controller
@@ -28,18 +29,18 @@ class AssetMaterialLabourRequestController extends Controller
     }
 
 
-    public function assign_required_material(Request $request){
-
-        dd($request->all());
-
-        // "_token" => "g24X3tMhTM7yYZpnxWdArFnRsUcRPQ9MOP9sT6Fp"
-        // "material_request_id" => "1"
-        // "material_required_quantity" => "50"
-        // "material_available_quantity" => "80"
-        // "assign_quantity" => "33"
-        // "role" => "admin"
 
 
+    public function assign_required_material(AssignRequiredMaterialRequest $request)
+    {
+        $response =$this->requestService->assignRequiredMaterial($request->validated(),$request->all());
+        // return response()->json($order, 201);
+        dd($response);
+        if ($response['status']) {
+            return redirect()->back()->with('success', $response['message']);
+        } else {
+            return redirect()->back()->with('error', $response['message']);
+        }
     }
 
     /**

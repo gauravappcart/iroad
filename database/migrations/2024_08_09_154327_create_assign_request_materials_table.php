@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('assign_materials', function (Blueprint $table) {
-            $table->bigIncrements('assign_material_id');
+        Schema::create('assign_request_materials', function (Blueprint $table) {
+            $table->bigIncrements('assign_request_material_id');
             $table->string('material_request_id');
             $table->float('request_quantity');
-            $table->float('received_quantity');
-
-            $table->float('qty_received')->nullable();
+            $table->float('received_quantity')->nullable();
             $table->string('received_by',100)->nullable();
             $table->date('received_date')->nullable();
 
@@ -31,6 +29,7 @@ return new class extends Migration
             $table->tinyInteger('is_active')->default(1);
             $table->string('created_by',100)->nullable();
             $table->string('updated_by',100)->nullable();
+            $table->softDeletes(); // <-- This will add a deleted_at field
             $table->timestamps();
         });
     }
@@ -42,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assign_materials');
+        Schema::dropIfExists('assign_request_materials');
     }
 };

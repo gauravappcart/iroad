@@ -6,6 +6,7 @@ use App\Scopes\GlobeScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 
 class Material_model extends Model
 {
@@ -41,5 +42,10 @@ class Material_model extends Model
     public function materialRequests()
     {
         return $this->hasMany(MaterialRequest::class, 'material_id', 'material_id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Units::class,'material_unit','unit_id');
     }
 }

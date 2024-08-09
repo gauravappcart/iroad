@@ -18,4 +18,9 @@ class SitePlanMaterial extends Model
     protected $primaryKey = 'site_plan_material_id';   //make default primary key
 
     protected $guarded = []; //allow  fill all data in table
+
+    public function material()
+    {
+        return $this->belongsTo(Material_model::class, 'material_id', 'material_id');
+    }
 }

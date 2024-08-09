@@ -12,9 +12,9 @@ class AssetSubGroup extends Model
 
     public $timestamps = true;  // will not take default column created_at and updated_at
 
-    protected $table = 'assets_sub_group';
+    protected $table = 'assign_request_materials';
 
-    protected $primaryKey = 'id';   //make default primary key
+    protected $primaryKey = 'assign_request_material_id';   //make default primary key
 
-    protected $guarded = []; //allow  fill all data in table  
+    protected $guarded = []; //allow  fill all data in table
 }
